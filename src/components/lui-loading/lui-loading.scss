@@ -1,0 +1,59 @@
+:host {
+    display: inline-block;
+}
+
+.lui-loading {
+    position: relative;
+    pointer-events: none;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.lui-loading-hide {
+    display: none;
+}
+
+@keyframes lui-loading-icon-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.lui-loading-icon {
+    display: block;
+    animation: 1s lui-loading-icon-animation linear infinite;
+}
+
+.lui-loading-fast .lui-loading-icon {
+    animation: 0.382s lui-loading-icon-animation linear infinite;
+}
+
+.lui-loading-s .lui-loading-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.lui-loading-m .lui-loading-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.lui-loading-l .lui-loading-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.lui-loading-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.lui-loading-center.lui-loading-show {
+    display: block;
+}

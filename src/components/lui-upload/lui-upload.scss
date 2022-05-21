@@ -1,0 +1,162 @@
+:host {
+    .lui-upload {
+        width: 100%;
+
+        &-input {
+            display: none;
+        }
+
+        &-button {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: 6px 10px;
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: #666;
+            background-color: #fff;
+            cursor: pointer;
+
+            .icon {
+                width: 16px;
+                height: 16px;
+                background-image: url("./images/upload-single.svg");
+                background-size: cover;
+            }
+
+            .text {
+                margin-left: 5px;
+            }
+
+            &:hover {
+                color: #495057;
+                border-color: #888;
+            }
+        }
+
+        &-drop {
+            width: 100%;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            color: #666;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            * {
+                pointer-events: none;
+            }
+
+            .icon {
+                width: 32px;
+                height: 32px;
+                background-image: url("./images/upload-single.svg");
+                background-size: cover;
+            }
+
+            .text {
+                margin: 15px 0 0;
+                line-height: 21px;
+            }
+
+            &:hover {
+                color: #495057;
+                border-color: #888;
+            }
+        }
+
+        &-tips {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+
+        &-preview {
+            .file {
+                margin-bottom: 5px;
+                border: 1px solid #aaa;
+                background-color: #fff;
+                position: relative;
+                padding: 4px 25px;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &:first-child {
+                    margin-top: 5px;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &:hover {
+                    background-color: #e6f7ff;
+                }
+
+                &-icon {
+                    position: absolute;
+                    left: 5px;
+                    top: 8px;
+                }
+
+                &-name {
+                    margin: 0;
+                    line-height: 1.5;
+                    max-width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                &-size {
+                    margin: 0;
+                    line-height: 1.5;
+                    max-width: 80px;
+                }
+
+                .delete-icon {
+                    position: absolute;
+                    right: 5px;
+                    top: 8px;
+                    cursor: pointer;
+                    opacity: 0.6;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    .lui-upload-disabled {
+        opacity: 0.5;
+
+        .lui-upload-button,
+        .lui-upload-drop {
+            cursor: not-allowed;
+        }
+
+        .lui-upload-preview {
+            .file {
+                .delete-icon {
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+
+    .lui-upload-multiple {
+        .lui-upload-button,
+        .lui-upload-drop {
+            .icon {
+                background-image: url("./images/upload-multiple.svg");
+            }
+        }
+    }
+}

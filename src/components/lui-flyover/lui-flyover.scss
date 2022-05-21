@@ -1,0 +1,107 @@
+.lui-flyover {
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 0;
+    background-color: #fff;
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+}
+
+.lui-flyover-right {
+    right: 0;
+}
+
+.lui-flyover-left {
+    left: 0;
+}
+
+.lui-flyover-show {
+    display: block;
+}
+
+.lui-flyover-show::before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    display: block;
+    height: 100%;
+    width: 10px;
+}
+
+.lui-flyover-right.lui-flyover-show::before {
+    left: -10px;
+    background-image: linear-gradient(to left, rgb(0 0 0 / 20%), rgb(0 0 0 / 0%));
+}
+
+.lui-flyover-left.lui-flyover-show::before {
+    left: 100%;
+    background-image: linear-gradient(to right, rgb(0 0 0 / 20%), rgb(0 0 0 / 0%));
+}
+
+.lui-flyover-overflow-hidden {
+    overflow: hidden;
+}
+
+@keyframes lui-slide-in-right {
+    from {
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.lui-slide-in-right {
+    animation-name: lui-slide-in-right;
+}
+
+@keyframes lui-slide-out-right {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        transform: translate3d(100%, 0, 0);
+    }
+}
+
+.lui-slide-out-right {
+    animation-name: lui-slide-out-right;
+}
+
+@keyframes lui-slide-in-left {
+    from {
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.lui-slide-in-left {
+    animation-name: lui-slide-in-left;
+}
+
+@keyframes lui-slide-out-left {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.lui-slide-out-left {
+    animation-name: lui-slide-out-left;
+}

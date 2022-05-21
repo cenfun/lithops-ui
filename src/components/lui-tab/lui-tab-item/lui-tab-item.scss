@@ -1,0 +1,95 @@
+.lui-tab-item {
+    position: relative;
+    padding: 0 15px;
+    max-width: 200px;
+    height: 36px;
+    line-height: 36px;
+    cursor: pointer;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    user-select: none;
+    color: #002b36;
+    font-weight: bold;
+}
+
+.lui-tab-right.lui-tab-item {
+    margin-left: -1px;
+}
+
+.lui-tab-item::after {
+    background-color: #a4a7ab;
+    display: block;
+    position: absolute;
+    bottom: 8px;
+    left: 100%;
+    width: 1px;
+    height: 20px;
+    content: "";
+    z-index: 0;
+}
+
+.lui-tab-right.lui-tab-item::after {
+    left: 0;
+}
+
+.lui-tab-item:hover {
+    background-color: #ebecef;
+    z-index: 2;
+}
+
+.lui-tab-item:hover::before,
+.lui-tab-item:hover::after {
+    background-repeat: no-repeat;
+    background-color: transparent;
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    content: "";
+}
+
+.lui-tab-item:hover::before {
+    background-image: url("images/hover-before.svg");
+}
+
+.lui-tab-item:hover::after {
+    left: 100%;
+    background-image: url("images/hover-after.svg");
+}
+
+.lui-tab-item.selected {
+    background-color: #fff;
+    position: relative;
+    z-index: 3;
+}
+
+.lui-tab-item.selected::before,
+.lui-tab-item.selected::after {
+    background-repeat: no-repeat;
+    background-color: transparent;
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    content: "";
+}
+
+.lui-tab-item.selected::before {
+    background-image: url("images/selected-before.svg");
+}
+
+.lui-tab-item.selected::after {
+    left: 100%;
+    background-image: url("images/selected-after.svg");
+}
+
+.lui-tab-item > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

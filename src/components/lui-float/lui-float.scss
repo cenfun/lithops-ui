@@ -1,0 +1,9 @@
+:host {
+    display: block;
+}
+
+:host::after {
+    clear: both;
+    content: "";
+    display: block;
+}

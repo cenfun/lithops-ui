@@ -1,0 +1,11 @@
+node_modules/*
+node_modules
+.DS_Store
+/.upgrade.json
+/package-lock.json
+/.temp
+/packages/*/build
+/build
+/packages/*/dist
+/dist
+*.map

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="icon" href="data:,">
+    <title>Preview lithops-ui</title>
+    <!--inject:start-->
+    <script src="../dist/lithops-ui.js"></script>
+    <!--inject:end-->
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: arial, sans-serif;
+        }
+
+        .preview-head {
+            height: 30px;
+            line-height: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 0 5px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .preview-body {
+            padding: 0 10px;
+        }
+
+        .preview-foot {
+            height: 1000px;
+        }
+
+        .lui-grid {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preview-head">Preview lithops-ui:</div>
+    <div class="preview-body">
+        <div class="preview-container">
+            <lui-button label="My Button"></lui-button>
+            <lui-button>Slot Button</lui-button>
+            <lui-button><b>Slot Html</b></lui-button>
+            <lui-grid></lui-grid>
+
+            <lui-label>Radio Examples</lui-label>
+            <lui-radio name="fruit" value="apple">Apple</lui-radio>
+            <lui-radio name="fruit" value="banana" checked>Banana</lui-radio>
+            <lui-radio name="fruit" value="orange" checked>Orange</lui-radio>
+            <lui-radio name="fruit" value="pear">Pear</lui-radio>
+            <lui-radio name="fruit" value="long-label" max-width="60">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-radio>
+            <lui-radio name="fruit" value="pineapple">Pineapple</lui-radio>
+            <lui-radio name="fruit" value="watermelon">Watermelon</lui-radio>
+            <lui-radio>
+                <p>I have no value</p>
+            </lui-radio>
+            <lui-input class="change-radio-width" type="number">Change Width</lui-input>
+
+            <lui-label>Checkbox Examples</lui-label>
+            <lui-checkbox value="value">Checkbox</lui-checkbox>
+            <lui-checkbox>Get value from label</lui-checkbox>
+            <lui-checkbox></lui-checkbox>
+            <lui-checkbox checked>checked</lui-checkbox>
+            <lui-checkbox checked disabled>disabled</lui-checkbox>
+            <lui-checkbox max-width="100">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-checkbox>
+            <lui-input class="change-checkbox-width" type="number">Change Width</lui-input>
+
+            <lui-label>Toast Example</lui-label>
+            <lui-button class="show-toast1">Show Toast 1</lui-button>
+            <lui-button class="show-toast2">Show Toast 2</lui-button>
+            <lui-button class="show-toast3">Show Toast 3</lui-button>
+            <div class="change-toast-type" style="display: flex; align-items: center;">
+                <p>Toast Type</p>
+                <lui-radio name="toastType" value="info" checked>info</lui-radio>
+                <lui-radio name="toastType" value="warning">warning</lui-radio>
+                <lui-radio name="toastType" value="error">error</lui-radio>
+                <lui-radio name="toastType" value="success">success</lui-radio>
+            </div>
+            <lui-input class="change-toast-content" type="text" value="hello world">Toast Content</lui-input>
+            <lui-input class="change-toast-timeout" type="number" value="3000">Toast Timeout</lui-input>
+            <lui-toast message="connected" timeout="0" type="warning" class="lui-toast" position></lui-toast>
+            <div class="change-toast-position" style="display: flex; align-items: center;">
+                <p>Toast Position</p>
+                <lui-radio name="toastPosition" value="left-top">left-top</lui-radio>
+                <lui-radio name="toastPosition" value="center-top" checked>center-top</lui-radio>
+                <lui-radio name="toastPosition" value="right-top">right-top</lui-radio>
+                <lui-radio name="toastPosition" value="left-center">left-center</lui-radio>
+                <lui-radio name="toastPosition" value="center-center">center-center</lui-radio>
+                <lui-radio name="toastPosition" value="right-center">right-center</lui-radio>
+                <lui-radio name="toastPosition" value="left-bottom">left-bottom</lui-radio>
+                <lui-radio name="toastPosition" value="center-bottom">center-bottom</lui-radio>
+                <lui-radio name="toastPosition" value="right-bottom">right-bottom</lui-radio>
+            </div>
+
+            <lui-label>Textarea Example</lui-label>
+            <lui-textarea
+                name="lui-textarea"
+                placeholder="Hello world"
+                label="Label"
+                max-length="20"
+                value="init value by attr"
+            >
+                Init value by slot           
+            </lui-textarea>
+
+            <lui-label>Select Example</lui-label>
+            <lui-select label="Label" width="200px" multiple>
+                <lui-select-option value="apple" selected>Apple</lui-select-option>
+                <lui-select-option value="banana">BananaBananaBanana</lui-select-option>
+                <lui-select-option value="orange">Orange</lui-select-option>
+                <lui-select-option value="pineapple">Pineapple</lui-select-option>
+                <lui-select-option value="">Empty</lui-select-option>
+            </lui-select>
+            <br>
+            <lui-button class="change-select-disabled">Change disabled</lui-button>
+            <lui-button class="change-select-multiple">Change multiple</lui-button>
+            <lui-button class="change-select-options">Set options</lui-button>
+            <br>
+
+            <lui-label class="switch-example">Switch Example</lui-label>
+            <lui-switch class="lui-switch" checked>Label</lui-switch>
+            <span>Switch Flags</span>
+            <div class="change-switch-flags" style="display: inline-flex;">
+                <lui-radio name="switchFlag" value="empty" checked>(Empty)</lui-radio>
+                <lui-radio name="switchFlag" value="Yes,No">Yes/No</lui-radio>
+                <lui-radio name="switchFlag" value="Open,Close">Open,Close</lui-radio>
+                <lui-radio name="switchFlag" value="ON, OFF">ON/OFF</lui-radio>
+            </div>
+            <br>
+            <span>Switch Colors</span>
+            <div class="change-switch-colors" style="display: inline-flex;">
+                <lui-radio name="switchColors" value="red, green">red/green</lui-radio>
+                <lui-radio name="switchColors" value="#1890ff, #aaa" checked>Default</lui-radio>
+                <lui-radio name="switchColors" value="">Empty</lui-radio>
+                <lui-radio name="switchColors" value="ss">Wrong</lui-radio>
+            </div>
+            <br>
+            <span>Switch Size</span>
+            <div class="change-switch-size" style="display: inline-flex;">
+                <lui-radio name="switchSize" value="s">s</lui-radio>
+                <lui-radio name="switchSize" value="m" checked>m</lui-radio>
+                <lui-radio name="switchSize" value="l">l</lui-radio>
+            </div>
+            <br>
+            <lui-button class="change-switch-disabled">Switch disabled</lui-button>
+
+            <lui-label>Upload Example</lui-label>
+            <lui-upload
+                class="lui-upload"
+                style="width: 300px;"
+                multiple
+                file-droppable
+                content="Click or Drag"
+            ></lui-upload>
+            <div style="display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap;">
+                <lui-button class="change-upload-multiple">Change multiple</lui-button>
+                <lui-button class="change-upload-disabled">Change disabled</lui-button>
+                <lui-button class="change-upload-drag">Change drag</lui-button>
+                <lui-button class="change-upload-files">Set files</lui-button>
+                <lui-select label="Change accept" class="change-upload-accept" style="vertical-align: top;">
+                    <lui-select-option value="*" selected>*</lui-select-option>
+                    <lui-select-option value="image/*">images</lui-select-option>
+                    <lui-select-option value=".xlsx">.xlsx</lui-select-option>
+                </lui-select>
+                <lui-input class="change-upload-size">Change Max Size</lui-input>
+                <lui-input class="change-upload-amount">Change Max Amount</lui-input>
+            </div>
+
+            <lui-label>Skeleton Example</lui-label>
+            <lui-skeleton class="lui-skeleton"></lui-skeleton>
+            <div style="margin-top: 10px; display: flex; align-items: center; flex-wrap: wrap;">
+                <lui-select label="Skeleton Type" width="100px" class="change-skeleton-type">
+                    <lui-select-option value="text" selected>text</lui-select-option>
+                    <lui-select-option value="avatar">avatar</lui-select-option>
+                    <lui-select-option value="image">image</lui-select-option>
+                    <lui-select-option value="table">table</lui-select-option>
+                    <lui-select-option value="avatar-text">avatar-text</lui-select-option>
+                    <lui-select-option value="text-avatar">text-avatar</lui-select-option>
+                </lui-select>
+                <lui-select label="Skeleton Rows" width="100px" class="change-skeleton-rows">
+                    <lui-select-option value="2">2</lui-select-option>
+                    <lui-select-option value="4" selected>4</lui-select-option>
+                    <lui-select-option value="6">6</lui-select-option>
+                    <lui-select-option value="8">8</lui-select-option>
+                    <lui-select-option value="1000">1000</lui-select-option>
+                </lui-select>
+                <lui-select label="Skeleton Cols" width="100px" class="change-skeleton-cols">
+                    <lui-select-option value="2">2</lui-select-option>
+                    <lui-select-option value="4" selected>4</lui-select-option>
+                    <lui-select-option value="6">6</lui-select-option>
+                    <lui-select-option value="8">8</lui-select-option>
+                    <lui-select-option value="1000">1000</lui-select-option>
+                </lui-select>
+                <lui-select label="Skeleton Animation" width="100px" class="change-skeleton-animation">
+                    <lui-select-option value="none">none</lui-select-option>
+                    <lui-select-option value="wave" selected>wave</lui-select-option>
+                    <lui-select-option value="fade">fade</lui-select-option>
+                </lui-select>
+                <lui-select label="Skeleton Text Align" width="100px" class="change-skeleton-align">
+                    <lui-select-option value="left" selected>left</lui-select-option>
+                    <lui-select-option value="center">center</lui-select-option>
+                    <lui-select-option value="right">right</lui-select-option>
+                </lui-select>
+                <lui-button class="change-skeleton-width">Change Width</lui-button>
+                <lui-button class="change-skeleton-height">Change Height</lui-button>
+                <lui-button class="change-skeleton-radius">Change Radius</lui-button>
+                <lui-button class="change-skeleton-column-width">Change Column Widths</lui-button>
+                <lui-button class="change-skeleton-column-align">Change Column Aligns</lui-button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const $container = document.querySelector('.preview-container');
+        // radio control
+        const $radios = document.querySelectorAll('lui-radio');
+        $radios.forEach((item) => {
+            item.addEventListener('change', (e) => {
+                console.log(e.detail);
+            });
+        });
+        document.querySelector('.change-radio-width').addEventListener('blur', (e) => {
+            $radios.forEach((item) => {
+                item.setAttribute('max-width', e.target.value || 0);
+            });
+        });
+
+        
+        // checkbox control
+        const $checkbox = document.querySelectorAll('lui-checkbox');
+        $checkbox.forEach((item) => {
+            item.addEventListener('change', (e) => {
+                console.log(e.detail);
+            });
+        });
+        document.querySelector('.change-checkbox-width').addEventListener('blur', (e) => {
+            $checkbox.forEach((item) => {
+                item.setAttribute('max-width', e.target.value || 0);
+            });
+        });
+
+        // toast control
+        const $toast1 = document.createElement('lui-toast');
+        const $toast2 = document.createElement('lui-toast');
+        const $toast3 = document.createElement('lui-toast');
+        const $toast4 = document.querySelector('.lui-toast');
+        let type = 'info';
+        let content = 'hello world';
+        let timeout = 3000;
+        let position = 'center-top';
+        const $toastType = document.querySelector('.change-toast-type');
+        const $toastContent = document.querySelector('.change-toast-content');
+        const $toastTimeout = document.querySelector('.change-toast-timeout');
+        const $toastPosition = document.querySelector('.change-toast-position');
+        $toastType.addEventListener('change', (e) => {
+            e.stopPropagation();
+            type = e.detail;
+        });
+        $toastContent.addEventListener('input', (e) => {
+            content = e.detail;
+        });
+        $toastTimeout.addEventListener('input', (e) => {
+            timeout = e.detail;
+        });
+        $toastPosition.addEventListener('change', (e) => {
+            position = e.detail;
+        });
+        const $showToast1 = document.querySelector('.show-toast1');
+        $showToast1.addEventListener('click', () => {
+            $toast1.show(content, type, timeout, position);
+        });
+        const $showToast2 = document.querySelector('.show-toast2');
+        $showToast2.addEventListener('click', () => {
+            $toast2.show('toast2', type, timeout, position);
+        });
+        const $showToast3 = document.querySelector('.show-toast3');
+        $showToast3.addEventListener('click', () => {
+            $toast3.show('toast3', type, timeout, position);
+            $toast4.show(null, null, null);
+        });
+
+        // textarea control
+        const $textarea = document.querySelector('lui-textarea');
+        $textarea.addEventListener('focus', () => {
+            console.log('focus');
+        });
+        $textarea.addEventListener('blur', () => {
+            console.log('blur');
+        });
+        $textarea.addEventListener('input', (e) => {
+            console.log(e.detail);
+        });
+
+        // select control
+        const $select = document.querySelector('lui-select');
+        $select.addEventListener('change', (e) => {
+            console.log(e.detail);
+        });
+        let selectMultiple = true;
+        let selectDisabled = false;
+        const $selectDisabled = document.querySelector('.change-select-disabled');
+        const $selectMultiple = document.querySelector('.change-select-multiple');
+        const $selectOption = document.querySelector('.change-select-options');
+        $selectDisabled.addEventListener('click', () => {
+            selectDisabled = !selectDisabled;
+            if (selectDisabled) {
+                $select.setAttribute('disabled', 'disabled');
+                return;
+            }
+            $select.removeAttribute('disabled');
+        });
+        $selectMultiple.addEventListener('click', () => {
+            selectMultiple = !selectMultiple;
+            if (selectMultiple) {
+                $select.setAttribute('multiple', 'multiple');
+                return;
+            }
+            $select.removeAttribute('multiple');
+        });
+        const options = [
+            {
+                key: '1',
+                value: 'value',
+                text: 'text',
+                label: 'label'
+            }
+        ];
+        $selectOption.addEventListener('click', () => {
+            $select.setOptions(options);
+        });
+
+        const $select2 = document.createElement('lui-select');
+        $select2.setOptions(options);
+        $container.insertBefore($select2, $container.querySelector('.switch-example'));
+
+        // switch control
+        const $switch = document.querySelector('.lui-switch');
+        const $switchFlag = document.querySelector('.change-switch-flags');
+        const $switchColor = document.querySelector('.change-switch-colors');
+        const $switchSize = document.querySelector('.change-switch-size');
+        const $switchDisabled = document.querySelector('.change-switch-disabled');
+        $switchFlag.addEventListener('change', (e) => {
+            if (e.detail === 'empty') {
+                $switch.setAttribute('flags', '');
+                return;
+            }
+            $switch.setAttribute('flags', e.detail);
+        });
+        $switchColor.addEventListener('change', (e) => {
+            $switch.setAttribute('colors', e.detail);
+        });
+        $switchSize.addEventListener('change', (e) => {
+            $switch.setAttribute('size', e.detail);
+        });
+        $switchDisabled.addEventListener('click', () => {
+            $switch.disabled = !$switch.disabled;
+        });
+        $switch.addEventListener('change', (e) => {
+            console.log(e.detail);
+        });
+
+        // upload control
+        const $upload = document.querySelector('.lui-upload');
+        const $uploadMultiple = document.querySelector('.change-upload-multiple');
+        const $uploadDisabled = document.querySelector('.change-upload-disabled');
+        const $uploadDrag = document.querySelector('.change-upload-drag');
+        const $uploadAccept = document.querySelector('.change-upload-accept');
+        const $uploadFiles = document.querySelector('.change-upload-files');
+        const $uploadSize = document.querySelector('.change-upload-size');
+        const $uploadAmount = document.querySelector('.change-upload-amount');
+        $upload.addEventListener('change', (e) => {
+            console.log(e.detail);
+        });
+        $upload.addEventListener('warning', (e) => {
+            const detail = e.detail;
+            if (detail.type === 'size') {
+                console.log(`Max Size: ${detail.maxSize}`);
+            } else {
+                console.log(`Max Amount: ${detail.maxAmount}`);
+            }
+            console.log('Files: ');
+            console.log(detail.files);
+        });
+        $uploadMultiple.addEventListener('click', () => {
+            if ($upload.multiple) {
+                $upload.removeAttribute('multiple');
+                return;
+            }
+            $upload.setAttribute('multiple', 'multiple');
+        });
+        $uploadDisabled.addEventListener('click', () => {
+            if ($upload.disabled) {
+                $upload.removeAttribute('disabled');
+                return;
+            }
+            $upload.setAttribute('disabled', 'disabled');
+        });
+        $uploadDrag.addEventListener('click', () => {
+            if ($upload.fileDroppable) {
+                $upload.textContent = 'Click';
+                $upload.removeAttribute('file-droppable');
+                return;
+            }
+            $upload.textContent = 'Click or Drag';
+            $upload.setAttribute('file-droppable', 'file-droppable');
+        });
+        $uploadAccept.addEventListener('change', (e) => {
+            $upload.setAttribute('accept', e.detail);
+        });
+        $uploadFiles.addEventListener('click', () => {
+            $upload.setSelectedFiles([
+                {
+                    name: 'A file with a very very very very long name.js',
+                    size: 39080
+                }
+            ]);
+        });
+        $uploadSize.addEventListener('input', (e) => {
+            $upload.setAttribute('max-size', e.detail);
+        });
+        $uploadAmount.addEventListener('input', (e) => {
+            $upload.setAttribute('max-amount', e.detail);
+        });
+
+        // skeleton control
+        const $skeleton = document.querySelector('.lui-skeleton');
+        const $skeletonType = document.querySelector('.change-skeleton-type');
+        const $skeletonRows = document.querySelector('.change-skeleton-rows');
+        const $skeletonCols = document.querySelector('.change-skeleton-cols');
+        const $skeletonAnimation = document.querySelector('.change-skeleton-animation');
+        const $skeletonAlign = document.querySelector('.change-skeleton-align');
+        const $skeletonWidth = document.querySelector('.change-skeleton-width');
+        const $skeletonHeight = document.querySelector('.change-skeleton-height');
+        const $skeletonRadius = document.querySelector('.change-skeleton-radius');
+        const $skeletonColumnWidth = document.querySelector('.change-skeleton-column-width');
+        const $skeletonColumnAlign = document.querySelector('.change-skeleton-column-align');
+        $skeletonType.addEventListener('change', (e) => {
+            $skeleton.type = e.detail;
+        });
+        $skeletonRows.addEventListener('change', (e) => {
+            $skeleton.rows = e.detail;
+        });
+        $skeletonCols.addEventListener('change', (e) => {
+            $skeleton.cols = e.detail;
+        });
+        $skeletonAnimation.addEventListener('change', (e) => {
+            $skeleton.animation = e.detail;
+        });
+        $skeletonAlign.addEventListener('change', (e) => {
+            $skeleton.textAlign = e.detail;
+        });
+        $skeletonWidth.addEventListener('click', () => {
+            if ($skeleton.width) {
+                $skeleton.removeAttribute('width');
+                return;
+            }
+            $skeleton.setAttribute('width', '300px');
+        });
+        $skeletonHeight.addEventListener('click', () => {
+            if ($skeleton.height) {
+                $skeleton.removeAttribute('height');
+                return;
+            }
+            $skeleton.setAttribute('height', '300px');
+        });
+        $skeletonRadius.addEventListener('click', () => {
+            if ($skeleton.avatarRadius === '96px') {
+                $skeleton.setAttribute('avatar-radius', '64px');
+                return;
+            }
+            $skeleton.setAttribute('avatar-radius', '96px');
+        });
+        $skeletonColumnWidth.addEventListener('click', () => {
+            if ($skeleton.columnWidths) {
+                $skeleton.removeAttribute('column-widths');
+                return;
+            }
+            $skeleton.setAttribute('column-widths', '10%, 10%, , 200px');
+        });
+        $skeletonColumnAlign.addEventListener('click', () => {
+            if ($skeleton.columnAligns) {
+                $skeleton.removeAttribute('column-aligns');
+                return;
+            }
+            $skeleton.setAttribute('column-aligns', 'left, right, ,center');
+        });
+    </script>
+    <div class="preview-foot"></div>
+</body>
+
+</html>

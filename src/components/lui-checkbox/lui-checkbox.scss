@@ -1,0 +1,113 @@
+.lui-checkbox {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: max-content;
+    padding: 5px;
+
+    label {
+        position: relative;
+        display: block;
+        padding-left: 25px;
+        min-width: 22px;
+        min-height: 21px;
+        line-height: 1.5;
+        cursor: pointer;
+
+        &::before {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(3px, -50%);
+            display: block;
+            width: 16px;
+            height: 16px;
+            content: "";
+            background-color: #fff;
+            border: #adb5bd solid 1px;
+            border-radius: 3px;
+        }
+
+        &::after {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(3px, -50%);
+            display: block;
+            width: 16px;
+            height: 16px;
+            content: "";
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 10px 10px;
+            background-clip: border-box;
+        }
+    }
+
+    input {
+        display: none;
+        width: 22px;
+        height: 22px;
+        opacity: 0;
+        padding: 0;
+        margin: 0;
+
+        &:checked {
+            ~ label {
+                &::before {
+                    color: #fff;
+                    border-color: #0077cf;
+                    background-color: #0077cf;
+                }
+
+                &::after {
+                    background-image: url("./images/checkbox.svg");
+                }
+            }
+        }
+
+        &:disabled {
+            ~ label {
+                color: #6c757d;
+            }
+
+            ~ label::before {
+                background-color: #e9ecef;
+            }
+        }
+
+        &:focus {
+            ~ label::before {
+                box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+            }
+        }
+
+        &:focus:not(:checked) {
+            ~ label::before {
+                border-color: #80bdff;
+            }
+        }
+
+        &:disabled:checked {
+            ~ label::before {
+                background-color: rgb(0 123 255 / 50%);
+                border-color: #80bdff;
+            }
+        }
+
+        &:not(:disabled):not(:checked):not(:focus) {
+            ~ label:hover::before {
+                border-color: #888;
+            }
+        }
+    }
+}
+
+:host([max-width]:not([max-width="0"])) {
+    label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

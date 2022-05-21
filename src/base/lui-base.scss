@@ -1,0 +1,84 @@
+:host,
+:host ::before,
+:host ::after,
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:host {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    display: block;
+    position: relative;
+}
+
+:host([active]) {
+    box-shadow: inset 1px 1px red, inset -1px -1px red;
+}
+
+//https://github.com/twbs/bootstrap/blob/main/dist/css/bootstrap.css
+
+a {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #0a58ca;
+}
+
+a:not([href]):not([class]),
+a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+img,
+svg {
+    vertical-align: middle;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-auto {
+    flex: auto;
+    overflow: hidden;
+}

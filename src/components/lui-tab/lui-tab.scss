@@ -1,0 +1,55 @@
+:host {
+    width: 100%;
+    height: 100%;
+}
+
+.lui-tab {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.lui-tab-header {
+    position: relative;
+    background: #dee1e6;
+    width: 100%;
+    border-top: 1px solid #fff;
+    z-index: 10;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.lui-tab-toolbar {
+    position: relative;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 5px;
+
+    > * {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.lui-tab-tabs {
+    position: relative;
+    height: 100%;
+    margin: 0 10px;
+    align-items: flex-end;
+    padding-top: 5px;
+}
+
+.lui-tab-panes {
+    position: relative;
+    overflow: hidden;
+}
+
+.lui-tab-full-height {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .lui-tab-panes {
+        flex: auto;
+    }
+}

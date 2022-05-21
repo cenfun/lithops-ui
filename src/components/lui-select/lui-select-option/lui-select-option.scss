@@ -1,0 +1,37 @@
+:host {
+    background-color: #fff;
+    transition: background-color 0.3s;
+
+    .lui-select-option {
+        padding: 4px 6px;
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+:host(:hover),
+:host([selected]:hover) {
+    background-color: #e6f7ff;
+}
+
+:host([selected]) {
+    background-color: #f0f0f0;
+
+    .lui-select-option {
+        position: relative;
+        padding-right: 18px;
+
+        &::after {
+            width: 12px;
+            height: 12px;
+            content: "";
+            position: absolute;
+            right: 4px;
+            top: 8px;
+            background-image: url("../images/selected.svg");
+            color: #107fff;
+        }
+    }
+}

@@ -1,0 +1,115 @@
+:host {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .lui-select {
+        display: inline-block;
+        position: relative;
+
+        &-value {
+            min-height: 29px;
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 0 20px 3px 5px;
+            font-size: 12px;
+            border: 1px solid #aaa;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            flex-wrap: wrap;
+
+            &:hover {
+                border-color: #888;
+            }
+
+            &-focus,
+            &-focus:hover {
+                border-color: #80bdff;
+                box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+            }
+        }
+
+        &-value-disabled {
+            cursor: not-allowed;
+        }
+
+        &-selected-item {
+            line-height: 1.5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 100%;
+            margin-top: 4px;
+
+            &-delete {
+                display: none;
+            }
+        }
+
+        &-options {
+            display: none;
+        }
+
+        &-dropdown-icon {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            background-image: url("./images/dropdown.svg");
+            width: 12px;
+            height: 12px;
+            pointer-events: none;
+            transform: translate(0, -50%);
+        }
+    }
+
+    .lui-select-label {
+        display: none;
+
+        &.lui-select-label-show {
+            display: inline-block;
+            margin-right: 5px;
+            line-height: 29px;
+        }
+    }
+}
+
+:host([multiple]) {
+    .lui-select-selected-item {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 0 20px 0 10px;
+        margin-right: 5px;
+        margin-top: 3px;
+        position: relative;
+
+        &-delete {
+            display: block;
+            width: 8px;
+            height: 8px;
+            cursor: pointer;
+            position: absolute;
+            right: 8px;
+            top: 5px;
+
+            line {
+                fill: transparent;
+                stroke: #888;
+                stroke-width: 0.5;
+            }
+
+            &:hover {
+                line {
+                    stroke: #333;
+                }
+            }
+        }
+    }
+}
+
+:host([multiple][disabled]) {
+    .lui-select-selected-item-delete {
+        cursor: not-allowed;
+    }
+}
