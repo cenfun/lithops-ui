@@ -1,7 +1,7 @@
 {
     "name": "lithops-ui",
     "description": "lithops-ui",
-    "version": "1.0.0",
+    "version": "2.1.0",
     "main": "dist/lithops-ui.js",
     "keywords": [
         "lithops-ui"
