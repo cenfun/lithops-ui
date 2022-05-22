@@ -1,22 +1,23 @@
 # Lithops UI
-> Lightweight UI base on lit
+> Lightweight UI base on [lit](https://github.com/lit/lit)
 
 ## Preview Online
 [https://cenfun.github.io/lithops-ui/](https://cenfun.github.io/lithops-ui/)
 ## Components
 * Button
 * Checkbox
-* Dropdown
-* Flex
 * Flyover
 * Input
 * Loading
 * Modal
-* Popover
+* Progress
 * Radio
 * Select
+* Skeleton
+* Switch
 * Tab
-* Tooltip
+* Toast
+* Upload
 ## Install
 ```sh
 npm i lithops-ui

@@ -6,6 +6,4 @@ const components = generateComponents(context);
 
 export { components };
 
-export default {
-    components
-};
+export default components;

@@ -1,6 +1,6 @@
-import { html, styleMap } from '../../vendor/lit.js';
+import { html } from 'lit';
 
-//import Util from '../../util/util.js';
+import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base.js';
 
@@ -114,7 +114,7 @@ export default class extends LuiBase {
             height: this.height
         };
         return html`
-            <div class="skeleton-image skeleton-body" style="${styleMap(styleList)}"></div>
+            <div class="skeleton-image skeleton-body" style="${Util.styleMap(styleList)}"></div>
         `;
     }
 
@@ -124,7 +124,7 @@ export default class extends LuiBase {
             height: this.avatarRadius
         };
         return html`
-            <div class="skeleton-avatar skeleton-body" style="${styleMap(styleList)}"></div>
+            <div class="skeleton-avatar skeleton-body" style="${Util.styleMap(styleList)}"></div>
         `;
     }
 
@@ -137,7 +137,7 @@ export default class extends LuiBase {
         for (let i = 0; i < this.rows; i++) {
             lines.push(html`<p class="skeleton-body"></p>`);
         }
-        return html`<div class="skeleton-text" style="${styleMap(styleList)}">${lines}</div>`;
+        return html`<div class="skeleton-text" style="${Util.styleMap(styleList)}">${lines}</div>`;
     }
 
     getTable() {
@@ -162,7 +162,7 @@ export default class extends LuiBase {
             rows.push(html`<tr>${row}</tr>`);
         }
         return html`
-            <div class="skeleton-table" style="${styleMap(styleList)}">
+            <div class="skeleton-table" style="${Util.styleMap(styleList)}">
                 <table>
                     ${rows}
                 </table>
@@ -175,7 +175,7 @@ export default class extends LuiBase {
             width: this.width
         };
         return html`
-            <div class="skeleton-avatar-text" style="${styleMap(styleList)}">
+            <div class="skeleton-avatar-text" style="${Util.styleMap(styleList)}">
                 ${this.getAvatar()}
                 <div style="width: ${this.space};" class="space"></div>
                 ${this.getText()}
@@ -188,7 +188,7 @@ export default class extends LuiBase {
             width: this.width
         };
         return html`
-            <div class="skeleton-avatar-text" style="${styleMap(styleList)}">
+            <div class="skeleton-avatar-text" style="${Util.styleMap(styleList)}">
                 ${this.getText('right')}
                 <div style="width: ${this.space};"></div>
                 ${this.getAvatar()}

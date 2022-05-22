@@ -46,11 +46,6 @@ export default function(context) {
             customElements.define(tagName, Component);
         }
 
-        //LuiButton, LuiGrid
-        //const ClassName = Util.kebabToPascalCase(tagName);
-
-        //console.log(customElements.get(tagName));
-
         // no private component
         if (Component.private) {
             return;

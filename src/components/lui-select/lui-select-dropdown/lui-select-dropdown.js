@@ -1,4 +1,6 @@
-import { html, styleMap } from '../../../vendor/lit.js';
+import { html } from 'lit';
+
+import Util from '../../../util/util.js';
 
 import LuiBase from '../../../base/lui-base.js';
 import componentStyle from './lui-select-dropdown.scss';
@@ -87,7 +89,7 @@ export default class extends LuiBase {
         });
 
         return html`
-            <div class="lui-select-dropdown" style="${styleMap(style)}" @change="${this.changeHandler}">
+            <div class="lui-select-dropdown" style="${Util.styleMap(style)}" @change="${this.changeHandler}">
                 ${$options}
             </div>
         `;

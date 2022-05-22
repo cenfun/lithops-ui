@@ -1,8 +1,6 @@
-import {
-    html, classMap, styleMap
-} from '../../vendor/lit.js';
+import { html } from 'lit';
 
-//import Util from '../../util/util.js';
+import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base';
 import componentStyle from './lui-toast.scss';
@@ -245,8 +243,8 @@ export default class extends LuiBase {
 
         return html`
             <div
-                class="${classMap(classList)}"
-                style="${styleMap(style)}"
+                class="${Util.classMap(classList)}"
+                style="${Util.styleMap(style)}"
                 @animationend="${this.animationHandler}"
                 @mouseenter="${this.mouseEnterHandler}"
                 @mouseleave="${this.mouseLeaveHandler}"

@@ -1,7 +1,7 @@
 
-import { html, styleMap } from '../../vendor/lit.js';
+import { html } from 'lit';
 
-//import Util from '../../util/util.js';
+import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base.js';
 import componentStyle from './lui-checkbox.scss';
@@ -80,7 +80,7 @@ export default class extends LuiBase {
                     type="checkbox"
                     @change="${this.changeHandler}"
                 >
-                <label for="${cid}" style="${styleMap(labelStyle)}">
+                <label for="${cid}" style="${Util.styleMap(labelStyle)}">
                     <slot></slot>
                 </label>
             </div>

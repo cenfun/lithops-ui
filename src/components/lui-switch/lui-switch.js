@@ -1,8 +1,6 @@
-import {
-    html, classMap, styleMap
-} from '../../vendor/lit.js';
+import { html } from 'lit';
 
-//import Util from '../../util/util.js';
+import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base.js';
 import componentStyle from './lui-switch.scss';
@@ -125,20 +123,20 @@ export default class extends LuiBase {
 
         const flags = this.flags.split(',').map((item) => item.trim()) || [];
         const $flags = html`
-            <div class="lui-switch-button-flag" style="${styleMap(leftFlagStyle)}">
+            <div class="lui-switch-button-flag" style="${Util.styleMap(leftFlagStyle)}">
                 <span class="lui-switch-button-checked-text">${flags[0] || ''}</span>
             </div>
-            <div class="lui-switch-button-flag" style="${styleMap(rightFlagStyle)}">
+            <div class="lui-switch-button-flag" style="${Util.styleMap(rightFlagStyle)}">
                 <span class="lui-switch-button-unchecked-text">${flags[1] || ''}</span>
             </div>
         `;
 
         return html`
-            <div class="${classMap(switchClassList)}">
+            <div class="${Util.classMap(switchClassList)}">
                 <div class="lui-switch-label">
                     <slot @slotchange="${this.slotChangeHandler}"></slot>
                 </div>
-                <div class="${classMap(buttonClassList)}" style="${styleMap(buttonStyle)}" @click=${this.clickHandler}>
+                <div class="${Util.classMap(buttonClassList)}" style="${Util.styleMap(buttonStyle)}" @click=${this.clickHandler}>
                     ${$flags}
                     <div class="lui-switch-button-icon"></div>
                 </div>

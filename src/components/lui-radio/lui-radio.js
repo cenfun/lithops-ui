@@ -1,8 +1,6 @@
-import {
-    html, classMap, styleMap
-} from '../../vendor/lit.js';
+import { html } from 'lit';
 
-//import Util from '../../util/util.js';
+import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base.js';
 import componentStyle from './lui-radio.scss';
@@ -96,7 +94,7 @@ export default class extends LuiBase {
                     type="radio"
                     @change="${this.changeHandler}"
                 >
-                <label for="${cid}" style="${styleMap(labelStyle)}" class="${classMap(labelClass)}">
+                <label for="${cid}" style="${Util.styleMap(labelStyle)}" class="${Util.classMap(labelClass)}">
                     <slot></slot>
                 </label>
             </div>

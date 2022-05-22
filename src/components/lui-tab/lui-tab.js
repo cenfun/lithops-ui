@@ -1,4 +1,4 @@
-import { html } from '../../vendor/lit.js';
+import { html } from 'lit';
 
 import Util from '../../util/util.js';
 

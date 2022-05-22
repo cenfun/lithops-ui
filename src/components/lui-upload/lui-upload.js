@@ -1,4 +1,4 @@
-import { html, classMap } from '../../vendor/lit.js';
+import { html } from 'lit';
 
 import Util from '../../util/util.js';
 
@@ -225,7 +225,7 @@ export default class extends LuiBase {
         });
 
         return html`
-            <div class="${classMap(classList)}">
+            <div class="${Util.classMap(classList)}">
                 <input
                     class="lui-upload-input"
                     type="file"

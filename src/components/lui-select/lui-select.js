@@ -1,6 +1,6 @@
-import { html, classMap } from '../../vendor/lit.js';
+import { html } from 'lit';
 
-//import Util from '../../util/util.js';
+import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base';
 import componentStyle from './lui-select.scss';
@@ -254,12 +254,12 @@ export default class extends LuiBase {
         }
 
         return html`
-            <div class="${classMap(labelClassList)}">
+            <div class="${Util.classMap(labelClassList)}">
                 ${this.label}
             </div> 
             <div class="lui-select" style="width: ${this.width};">
                 <div
-                    class="${classMap(inputClassList)}"
+                    class="${Util.classMap(inputClassList)}"
                     type="text"
                     tabindex="0"
                     @click="${this.switchDropdown}"

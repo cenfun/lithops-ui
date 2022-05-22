@@ -30,16 +30,9 @@
         }
 
         .preview-body {
-            padding: 0 10px;
+            padding: 10px;
         }
 
-        .preview-foot {
-            height: 1000px;
-        }
-
-        .lui-grid {
-            height: 100%;
-        }
     </style>
 </head>
 
@@ -50,7 +43,6 @@
             <lui-button label="My Button"></lui-button>
             <lui-button>Slot Button</lui-button>
             <lui-button><b>Slot Html</b></lui-button>
-            <lui-grid></lui-grid>
 
             <lui-label>Radio Examples</lui-label>
             <lui-radio name="fruit" value="apple">Apple</lui-radio>
@@ -219,6 +211,9 @@
         </div>
     </div>
     <script>
+        const lui = window['lithops-ui'];
+        console.log(lui.components);
+
         const $container = document.querySelector('.preview-container');
         // radio control
         const $radios = document.querySelectorAll('lui-radio');

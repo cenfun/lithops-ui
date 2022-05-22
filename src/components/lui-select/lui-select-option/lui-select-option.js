@@ -1,4 +1,4 @@
-import { html } from '../../../vendor/lit.js';
+import { html } from 'lit';
 
 import LuiBase from '../../../base/lui-base.js';
 import componentStyle from './lui-select-option.scss';

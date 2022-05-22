@@ -1,4 +1,4 @@
-import { LitElement } from '../vendor/lit.js';
+import { LitElement } from 'lit';
 import Util from '../util/util.js';
 import baseStyle from './lui-base.scss';
 

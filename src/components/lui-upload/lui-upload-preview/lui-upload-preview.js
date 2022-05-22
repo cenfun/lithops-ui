@@ -1,4 +1,6 @@
-import { html, styleMap } from '../../../vendor/lit.js';
+import { html } from 'lit';
+
+import Util from '../../../util/util.js';
 
 import LuiBase from '../../../base/lui-base';
 
@@ -40,7 +42,7 @@ export default class extends LuiBase {
         }
 
         return html`
-            <div class="lui-upload-preview" style="${styleMap(imageStye)}">
+            <div class="lui-upload-preview" style="${Util.styleMap(imageStye)}">
                 <img class="image" src="${this.url}" />
                 <i class="${transTop ? 'icon-bottom' : 'icon-top'}"></i>
             </div>
