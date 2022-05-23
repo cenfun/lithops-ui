@@ -7,7 +7,7 @@
         "lithops-ui"
     ],
     "scripts": {
-        "pack": "sf pack -m -p docs"
+        "pack": "sf pack -m -p docs -q v={version}"
     },
     "files": [
         "dist"

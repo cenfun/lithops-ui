@@ -1,3 +1,4 @@
+![](scripts/lithops.jpg)
 # Lithops UI
 - Lightweight UI web components based on [lit](https://github.com/lit/lit)
 - Zero dependencies (lit bundled)
