@@ -80,8 +80,8 @@
             <div class="lui-item-name">lui-input</div>
             <div class="lui-item-example">
                 <lui-input value="value">key:</lui-input>
-                <lui-input placeholder="placeholder">name:</lui-input>
-                <lui-input width="200px"><b>Slot Name</b></lui-input>
+                <lui-input placeholder="placeholder" label="name:"></lui-input>
+                <lui-input width="200px"><b>Slot Name:</b></lui-input>
                 <lui-input disabled>disabled:</lui-input>
             </div>
         </div>
@@ -91,14 +91,11 @@
                 <lui-radio name="fruit" value="apple">Apple</lui-radio>
                 <lui-radio name="fruit" value="banana" checked>Banana</lui-radio>
                 <lui-radio name="fruit" value="orange" checked>Orange</lui-radio>
-                <lui-radio name="fruit" value="pear">Pear</lui-radio>
-                <lui-radio name="fruit" value="long-label" max-width="60">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-radio>
-                <lui-radio name="fruit" value="pineapple">Pineapple</lui-radio>
-                <lui-radio name="fruit" value="watermelon">Watermelon</lui-radio>
+                <lui-radio name="fruit" value="long-label" max-width="260">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-radio>
+                <lui-radio disabled>disabled</lui-radio>
                 <lui-radio>
-                    <p>I have no value</p>
+                    <b>I have no value (html slot)</b>
                 </lui-radio>
-                <lui-input class="change-radio-width" type="number">Change Width</lui-input>
             </div>
         </div>
         <div class="lui-item">
@@ -108,9 +105,8 @@
                 <lui-checkbox>Get value from label</lui-checkbox>
                 <lui-checkbox></lui-checkbox>
                 <lui-checkbox checked>checked</lui-checkbox>
-                <lui-checkbox checked disabled>disabled</lui-checkbox>
-                <lui-checkbox max-width="100">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-checkbox>
-                <lui-input class="change-checkbox-width" type="number">Change Width</lui-input>
+                <lui-checkbox disabled>disabled</lui-checkbox>
+                <lui-checkbox max-width="260">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-checkbox>
             </div>
         </div>
         <div class="lui-item">
@@ -274,17 +270,11 @@
         const lui = window['lithops-ui'];
         console.log(lui.components);
 
-        const $container = document.querySelector('.preview-container');
         // radio control
         const $radios = document.querySelectorAll('lui-radio');
         $radios.forEach((item) => {
             item.addEventListener('change', (e) => {
                 console.log(e.detail);
-            });
-        });
-        document.querySelector('.change-radio-width').addEventListener('blur', (e) => {
-            $radios.forEach((item) => {
-                item.setAttribute('max-width', e.target.value || 0);
             });
         });
 
@@ -296,12 +286,6 @@
                 console.log(e.detail);
             });
         });
-        document.querySelector('.change-checkbox-width').addEventListener('blur', (e) => {
-            $checkbox.forEach((item) => {
-                item.setAttribute('max-width', e.target.value || 0);
-            });
-        });
-
         // toast control
         const $toast1 = document.createElement('lui-toast');
         const $toast2 = document.createElement('lui-toast');
@@ -340,18 +324,6 @@
         $showToast3.addEventListener('click', () => {
             $toast3.show('toast3', type, timeout, position);
             $toast4.show(null, null, null);
-        });
-
-        // textarea control
-        const $textarea = document.querySelector('lui-textarea');
-        $textarea.addEventListener('focus', () => {
-            console.log('focus');
-        });
-        $textarea.addEventListener('blur', () => {
-            console.log('blur');
-        });
-        $textarea.addEventListener('input', (e) => {
-            console.log(e.detail);
         });
 
         // select control
@@ -394,7 +366,7 @@
 
         const $select2 = document.createElement('lui-select');
         $select2.setOptions(options);
-        $container.insertBefore($select2, $container.querySelector('.switch-example'));
+        //$container.insertBefore($select2, $container.querySelector('.switch-example'));
 
         // switch control
         const $switch = document.querySelector('.lui-switch');

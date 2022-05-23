@@ -53,7 +53,7 @@ export default class extends LuiBase {
     firstUpdated() {
         if (this.label) {
             this.slotChangeHandler({
-                target: this.$("slot[name='label']")
+                target: this.$('slot')
             });
         }
         if (this.focused) {
@@ -85,7 +85,7 @@ export default class extends LuiBase {
                 <input
                     .disabled="${this.disabled}"
                     placeholder="${this.placeholder}"
-                    type="${this.type}"
+                    .type="${this.type}"
                     value="${this.value}"
                     style="width: ${this.width};"
                     title="${this.title}"
