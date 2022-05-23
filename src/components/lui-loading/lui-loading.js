@@ -40,9 +40,6 @@ export default class extends LuiBase {
 
     getClassList() {
         const ls = ['lui-loading'];
-        if (this.center) {
-            ls.push('lui-loading-center');
-        }
         if (this.fast) {
             ls.push('lui-loading-fast');
         }
@@ -59,7 +56,7 @@ export default class extends LuiBase {
 
         let cssText = '';
         if (this.center) {
-            cssText = 'width:100%;height:100%;display:block;';
+            cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);';
         }
         this.host.style.cssText = cssText;
 

@@ -40,9 +40,9 @@ export default class extends LuiBase {
         }
 
         return html`
-            <div class="${classList.join(' ')}">
+            <button class="${classList.join(' ')}" .disabled=${this.disabled}>
                 <slot>${this.label}</slot>
-            </div>
+            </button>
         `;
     }
 

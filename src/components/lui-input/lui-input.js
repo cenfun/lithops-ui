@@ -29,7 +29,7 @@ export default class extends LuiBase {
     constructor() {
         super();
         this.type = 'text';
-        this.width = '80px';
+        this.width = '100px';
     }
 
     connectedCallback() {
