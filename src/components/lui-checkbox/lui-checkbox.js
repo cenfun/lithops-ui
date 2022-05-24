@@ -1,7 +1,7 @@
 
 import { html } from 'lit';
 
-import Util from '../../util/util.js';
+//import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base.js';
 import componentStyle from './lui-checkbox.scss';
@@ -12,10 +12,6 @@ export default class extends LuiBase {
     static properties = {
         checked: {
             type: Boolean
-        },
-        maxWidth: {
-            attribute: 'max-width',
-            type: Number
         },
         value: {
             type: String
@@ -66,9 +62,6 @@ export default class extends LuiBase {
     }
 
     render() {
-        const labelStyle = {
-            'max-width': this.maxWidth ? `${this.maxWidth}px` : null
-        };
         const cid = `lui-checkbox-${this.uid}`;
         return html`
             <div class="lui-checkbox">
@@ -80,7 +73,7 @@ export default class extends LuiBase {
                     type="checkbox"
                     @change="${this.changeHandler}"
                 >
-                <label for="${cid}" style="${Util.styleMap(labelStyle)}">
+                <label for="${cid}">
                     <slot></slot>
                 </label>
             </div>

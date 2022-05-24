@@ -107,11 +107,20 @@
         <div class="lui-item">
             <div class="lui-item-name">lui-button</div>
             <div class="lui-item-example">
-                <lui-button label="My Button"></lui-button>
-                <lui-button>Slot Button</lui-button>
-                <lui-button><b>Slot Html</b></lui-button>
+                <lui-button label="button"></lui-button>
+                <lui-button>label</lui-button>
+                <lui-button><b>slot html</b></lui-button>
                 <lui-button primary>primary</lui-button>
                 <lui-button disabled>disabled</lui-button>
+            </div>
+        </div>
+        <div class="lui-item">
+            <div class="lui-item-name">lui-checkbox</div>
+            <div class="lui-item-example">
+                <lui-checkbox value="value">label</lui-checkbox>
+                <lui-checkbox checked>checked</lui-checkbox>
+                <lui-checkbox disabled>disabled</lui-checkbox>
+                <lui-checkbox>this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long!</lui-checkbox>
             </div>
         </div>
         <div class="lui-item">
@@ -129,24 +138,14 @@
                 <lui-radio name="fruit" value="apple">Apple</lui-radio>
                 <lui-radio name="fruit" value="banana" checked>Banana</lui-radio>
                 <lui-radio name="fruit" value="orange" checked>Orange</lui-radio>
-                <lui-radio name="fruit" value="long-label" max-width="260">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-radio>
+                <lui-radio name="fruit" value="long-label" max-width="260">this label is long! this label is long! this label is long! this label is long! this label is long!</lui-radio>
                 <lui-radio disabled>disabled</lui-radio>
                 <lui-radio>
                     <b>I have no value (html slot)</b>
                 </lui-radio>
             </div>
         </div>
-        <div class="lui-item">
-            <div class="lui-item-name">lui-checkbox</div>
-            <div class="lui-item-example">
-                <lui-checkbox value="value">Checkbox</lui-checkbox>
-                <lui-checkbox>Get value from label</lui-checkbox>
-                <lui-checkbox></lui-checkbox>
-                <lui-checkbox checked>checked</lui-checkbox>
-                <lui-checkbox disabled>disabled</lui-checkbox>
-                <lui-checkbox max-width="260">This label is very long! This label is very long! This label is very long! This label is very long! This label is very long!</lui-checkbox>
-            </div>
-        </div>
+        
         <div class="lui-item">
             <div class="lui-item-name">lui-loading</div>
             <div class="lui-item-example">
@@ -156,6 +155,21 @@
                 <lui-loading center></lui-loading>
             </div>
         </div>
+
+        <div class="lui-item">
+            <div class="lui-item-name">lui-flyover</div>
+            <div class="lui-item-example">
+                <lui-select class="st-flyover" label="width:">
+                    <option></option>
+                    <option>50%</option>
+                    <option>80%</option>
+                    <option>100px</option>
+                </lui-select>
+                <lui-button class="bt-toggle-flyover">toggle flayover</lui-button>
+            </div>
+        </div>
+
+
         <div class="lui-item">
             <div class="lui-item-name">lui-toast</div>
             <div class="lui-item-example">
@@ -308,6 +322,17 @@
         const lui = window['lithops-ui'];
         console.log(lui.components);
 
+        const $ = (selector) => {
+            return document.querySelector(selector);
+        };
+        const bind = (selector, type, callback) => {
+            const $elem = $(selector);
+            if ($elem) {
+                $elem.addEventListener(type, callback);
+            }
+        };
+        
+
         // radio control
         const $radios = document.querySelectorAll('lui-radio');
         $radios.forEach((item) => {
@@ -324,6 +349,27 @@
                 console.log(e.detail);
             });
         });
+
+        // flyover control
+        let flyover;
+        bind('.bt-toggle-flyover', 'click', function(e) {
+
+            const width = $('.st-flyover').value;
+            console.log(width);
+
+            if (!flyover) {
+                flyover = document.createElement('lui-flyover');
+                flyover.setAttribute('width', width);
+                document.body.appendChild(flyover);
+                return;
+            }
+
+            flyover.close();
+            flyover = null;
+            
+        });
+
+
         // toast control
         const $toast1 = document.createElement('lui-toast');
         const $toast2 = document.createElement('lui-toast');
@@ -483,7 +529,7 @@
         $uploadFiles.addEventListener('click', () => {
             $upload.setSelectedFiles([
                 {
-                    name: 'A file with a very very very very long name.js',
+                    name: 'A file with a long name.js',
                     size: 39080
                 }
             ]);

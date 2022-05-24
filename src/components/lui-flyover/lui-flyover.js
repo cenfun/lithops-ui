@@ -14,9 +14,6 @@ export default class extends LuiBase {
         },
         position: {
             type: String
-        },
-        visible: {
-            type: Boolean
         }
     };
 
@@ -61,8 +58,8 @@ export default class extends LuiBase {
         }
     }
 
-    onStart(visible) {
-        this.visible = visible;
+    onStart(_visible) {
+        this._visible = _visible;
         if (this.hasStarted) {
             this.onEnd();
         }
@@ -70,7 +67,7 @@ export default class extends LuiBase {
         this.unbindEvents();
         const cl = this.classList;
         const st = this.style;
-        if (visible) {
+        if (_visible) {
             cl.add(`lui-slide-in-${this.position}`, 'lui-flyover-show');
             st.width = this.width;
         } else {
@@ -86,7 +83,7 @@ export default class extends LuiBase {
         this.unbindEvents();
         const cl = this.classList;
         const st = this.style;
-        if (this.visible) {
+        if (this._visible) {
             cl.remove(`lui-slide-in-${this.position}`);
         } else {
             cl.remove(`lui-slide-out-${this.position}`, 'lui-flyover-show');
