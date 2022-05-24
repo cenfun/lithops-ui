@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import Util from '../../util/util.js';
+//import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base.js';
 import componentStyle from './lui-radio.scss';
@@ -14,10 +14,6 @@ export default class extends LuiBase {
         },
         value: {
             type: String
-        },
-        maxWidth: {
-            attribute: 'max-width',
-            type: Number
         },
         name: {
             type: String
@@ -62,7 +58,10 @@ export default class extends LuiBase {
     changeHandler(e) {
         this.setAttribute('checked', 'checked');
         this.radioCheckedHandler();
-        this.emit('change', e.target.value, true);
+        this.emit('change', {
+            value: e.target.value,
+            name: this.name
+        }, true);
     }
 
     radioCheckedHandler() {
@@ -76,12 +75,7 @@ export default class extends LuiBase {
     }
 
     render() {
-        const labelStyle = {
-            'max-width': this.maxWidth ? `${this.maxWidth}px` : null
-        };
-        const labelClass = {
-            'label-ellipsis': Boolean(this.maxWidth)
-        };
+
         const cid = `lui-radio-${this.uid}`;
 
         return html`
@@ -94,7 +88,7 @@ export default class extends LuiBase {
                     type="radio"
                     @change="${this.changeHandler}"
                 >
-                <label for="${cid}" style="${Util.styleMap(labelStyle)}" class="${Util.classMap(labelClass)}">
+                <label for="${cid}">
                     <slot></slot>
                 </label>
             </div>

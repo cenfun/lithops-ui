@@ -104,6 +104,7 @@
         <div><a href="https://github.com/cenfun/lithops-ui" target="_blank" class="icon-github"></a></div>
     </div>
     <div class="lui-body">
+
         <div class="lui-item">
             <div class="lui-item-name">lui-button</div>
             <div class="lui-item-example">
@@ -114,15 +115,30 @@
                 <lui-button disabled>disabled</lui-button>
             </div>
         </div>
+
         <div class="lui-item">
             <div class="lui-item-name">lui-checkbox</div>
             <div class="lui-item-example">
-                <lui-checkbox value="value">label</lui-checkbox>
+                <lui-checkbox>label</lui-checkbox>
                 <lui-checkbox checked>checked</lui-checkbox>
                 <lui-checkbox disabled>disabled</lui-checkbox>
-                <lui-checkbox>this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long!</lui-checkbox>
+                <lui-checkbox value="value">this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long!</lui-checkbox>
             </div>
         </div>
+
+        <div class="lui-item">
+            <div class="lui-item-name">lui-flyover</div>
+            <div class="lui-item-example">
+                <select class="st-flyover">
+                    <option>30%</option>
+                    <option>50%</option>
+                    <option>80%</option>
+                    <option>100px</option>
+                </select>
+                <lui-button class="bt-toggle-flyover">toggle flayover</lui-button>
+            </div>
+        </div>
+
         <div class="lui-item">
             <div class="lui-item-name">lui-input</div>
             <div class="lui-item-example">
@@ -132,20 +148,7 @@
                 <lui-input disabled>disabled:</lui-input>
             </div>
         </div>
-        <div class="lui-item">
-            <div class="lui-item-name">lui-radio</div>
-            <div class="lui-item-example">
-                <lui-radio name="fruit" value="apple">Apple</lui-radio>
-                <lui-radio name="fruit" value="banana" checked>Banana</lui-radio>
-                <lui-radio name="fruit" value="orange" checked>Orange</lui-radio>
-                <lui-radio name="fruit" value="long-label" max-width="260">this label is long! this label is long! this label is long! this label is long! this label is long!</lui-radio>
-                <lui-radio disabled>disabled</lui-radio>
-                <lui-radio>
-                    <b>I have no value (html slot)</b>
-                </lui-radio>
-            </div>
-        </div>
-        
+
         <div class="lui-item">
             <div class="lui-item-name">lui-loading</div>
             <div class="lui-item-example">
@@ -157,18 +160,21 @@
         </div>
 
         <div class="lui-item">
-            <div class="lui-item-name">lui-flyover</div>
+            <div class="lui-item-name">lui-modal</div>
             <div class="lui-item-example">
-                <lui-select class="st-flyover" label="width:">
-                    <option></option>
-                    <option>50%</option>
-                    <option>80%</option>
-                    <option>100px</option>
-                </lui-select>
-                <lui-button class="bt-toggle-flyover">toggle flayover</lui-button>
+                <lui-button class="bt-open-modal">open modal</lui-button>
             </div>
         </div>
 
+        <div class="lui-item">
+            <div class="lui-item-name">lui-radio</div>
+            <div class="lui-item-example">
+                <lui-radio name="radio-name">label</lui-radio>
+                <lui-radio name="radio-name" checked>checked</lui-radio>
+                <lui-radio disabled>disabled</lui-radio>
+                <lui-radio name="radio-name" value="value">this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long!</lui-radio>
+            </div>
+        </div>
 
         <div class="lui-item">
             <div class="lui-item-name">lui-toast</div>
@@ -325,34 +331,36 @@
         const $ = (selector) => {
             return document.querySelector(selector);
         };
-        const bind = (selector, type, callback) => {
+        const $on = (selector, type, callback) => {
             const $elem = $(selector);
             if ($elem) {
                 $elem.addEventListener(type, callback);
             }
         };
-        
-
-        // radio control
-        const $radios = document.querySelectorAll('lui-radio');
-        $radios.forEach((item) => {
-            item.addEventListener('change', (e) => {
-                console.log(e.detail);
+        const $$ = (selector) => {
+            return document.querySelectorAll(selector);
+        };
+        const $$on = (selector, type, callback) => {
+            const $elems = $$(selector);
+            Array.from($elems).forEach(($elem) => {
+                $elem.addEventListener(type, callback);
             });
-        });
+        };
 
         
         // checkbox control
-        const $checkbox = document.querySelectorAll('lui-checkbox');
-        $checkbox.forEach((item) => {
-            item.addEventListener('change', (e) => {
-                console.log(e.detail);
-            });
+        $$on('lui-checkbox', 'change', (e) => {
+            console.log(e.detail);
+        });
+
+        // radio control
+        $$on('lui-radio', 'change', (e) => {
+            console.log(e.detail);
         });
 
         // flyover control
         let flyover;
-        bind('.bt-toggle-flyover', 'click', function(e) {
+        $on('.bt-toggle-flyover', 'click', function(e) {
 
             const width = $('.st-flyover').value;
             console.log(width);
@@ -368,6 +376,8 @@
             flyover = null;
             
         });
+
+        //bt-open-modal
 
 
         // toast control
