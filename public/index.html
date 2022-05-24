@@ -129,6 +129,10 @@
         <div class="lui-item">
             <div class="lui-item-name">lui-flyover</div>
             <div class="lui-item-example">
+                <select class="st-position">
+                    <option>right</option>
+                    <option>left</option>
+                </select>
                 <select class="st-flyover">
                     <option>30%</option>
                     <option>50%</option>
@@ -186,36 +190,7 @@
             </div>
         </div>
 
-        <div class="lui-item">
-            <div class="lui-item-name">lui-toast</div>
-            <div class="lui-item-example">
-                <lui-button class="show-toast1">Show Toast 1</lui-button>
-                <lui-button class="show-toast2">Show Toast 2</lui-button>
-                <lui-button class="show-toast3">Show Toast 3</lui-button>
-                <div class="change-toast-type" style="display: flex; align-items: center;">
-                    <p>Toast Type</p>
-                    <lui-radio name="toastType" value="info" checked>info</lui-radio>
-                    <lui-radio name="toastType" value="warning">warning</lui-radio>
-                    <lui-radio name="toastType" value="error">error</lui-radio>
-                    <lui-radio name="toastType" value="success">success</lui-radio>
-                </div>
-                <lui-input class="change-toast-content" type="text" value="hello world">Toast Content</lui-input>
-                <lui-input class="change-toast-timeout" type="number" value="3000">Toast Timeout</lui-input>
-                <lui-toast message="connected" timeout="0" type="warning" class="lui-toast" position></lui-toast>
-                <div class="change-toast-position" style="display: flex; align-items: center;">
-                    <p>Toast Position</p>
-                    <lui-radio name="toastPosition" value="left-top">left-top</lui-radio>
-                    <lui-radio name="toastPosition" value="center-top" checked>center-top</lui-radio>
-                    <lui-radio name="toastPosition" value="right-top">right-top</lui-radio>
-                    <lui-radio name="toastPosition" value="left-center">left-center</lui-radio>
-                    <lui-radio name="toastPosition" value="center-center">center-center</lui-radio>
-                    <lui-radio name="toastPosition" value="right-center">right-center</lui-radio>
-                    <lui-radio name="toastPosition" value="left-bottom">left-bottom</lui-radio>
-                    <lui-radio name="toastPosition" value="center-bottom">center-bottom</lui-radio>
-                    <lui-radio name="toastPosition" value="right-bottom">right-bottom</lui-radio>
-                </div>
-            </div>
-        </div>
+        
         <div class="lui-item">
             <div class="lui-item-name">lui-select</div>
             <div class="lui-item-example">
@@ -232,6 +207,7 @@
                 <lui-button class="change-select-options">Set options</lui-button>
             </div>
         </div>
+
         <div class="lui-item">
             <div class="lui-item-name">lui-switch</div>
             <div class="lui-item-example">
@@ -262,73 +238,34 @@
                 <lui-button class="change-switch-disabled">Switch disabled</lui-button>
             </div>
         </div>
+
         <div class="lui-item">
-            <div class="lui-item-name">lui-upload</div>
+            <div class="lui-item-name">lui-toast</div>
             <div class="lui-item-example">
-                <lui-upload
-                    class="lui-upload"
-                    style="width: 300px;"
-                    multiple
-                    file-droppable
-                    content="Click or Drag"
-                ></lui-upload>
-                <div style="display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap;">
-                    <lui-button class="change-upload-multiple">Change multiple</lui-button>
-                    <lui-button class="change-upload-disabled">Change disabled</lui-button>
-                    <lui-button class="change-upload-drag">Change drag</lui-button>
-                    <lui-button class="change-upload-files">Set files</lui-button>
-                    <lui-select label="Change accept" class="change-upload-accept" style="vertical-align: top;">
-                        <lui-select-option value="*" selected>*</lui-select-option>
-                        <lui-select-option value="image/*">images</lui-select-option>
-                        <lui-select-option value=".xlsx">.xlsx</lui-select-option>
-                    </lui-select>
-                    <lui-input class="change-upload-size">Change Max Size</lui-input>
-                    <lui-input class="change-upload-amount">Change Max Amount</lui-input>
+                <lui-button class="show-toast1">Show Toast 1</lui-button>
+                <lui-button class="show-toast2">Show Toast 2</lui-button>
+                <lui-button class="show-toast3">Show Toast 3</lui-button>
+                <div class="change-toast-type" style="display: flex; align-items: center;">
+                    <p>Toast Type</p>
+                    <lui-radio name="toastType" value="info" checked>info</lui-radio>
+                    <lui-radio name="toastType" value="warning">warning</lui-radio>
+                    <lui-radio name="toastType" value="error">error</lui-radio>
+                    <lui-radio name="toastType" value="success">success</lui-radio>
                 </div>
-            </div>
-        </div>
-        <div class="lui-item">
-            <div class="lui-item-name">lui-skeleton</div>
-            <div class="lui-item-example">
-                <lui-skeleton class="lui-skeleton"></lui-skeleton>
-                <div style="margin-top: 10px; display: flex; align-items: center; flex-wrap: wrap;">
-                    <lui-select label="Skeleton Type" width="100px" class="change-skeleton-type">
-                        <lui-select-option value="text" selected>text</lui-select-option>
-                        <lui-select-option value="avatar">avatar</lui-select-option>
-                        <lui-select-option value="image">image</lui-select-option>
-                        <lui-select-option value="table">table</lui-select-option>
-                        <lui-select-option value="avatar-text">avatar-text</lui-select-option>
-                        <lui-select-option value="text-avatar">text-avatar</lui-select-option>
-                    </lui-select>
-                    <lui-select label="Skeleton Rows" width="100px" class="change-skeleton-rows">
-                        <lui-select-option value="2">2</lui-select-option>
-                        <lui-select-option value="4" selected>4</lui-select-option>
-                        <lui-select-option value="6">6</lui-select-option>
-                        <lui-select-option value="8">8</lui-select-option>
-                        <lui-select-option value="1000">1000</lui-select-option>
-                    </lui-select>
-                    <lui-select label="Skeleton Cols" width="100px" class="change-skeleton-cols">
-                        <lui-select-option value="2">2</lui-select-option>
-                        <lui-select-option value="4" selected>4</lui-select-option>
-                        <lui-select-option value="6">6</lui-select-option>
-                        <lui-select-option value="8">8</lui-select-option>
-                        <lui-select-option value="1000">1000</lui-select-option>
-                    </lui-select>
-                    <lui-select label="Skeleton Animation" width="100px" class="change-skeleton-animation">
-                        <lui-select-option value="none">none</lui-select-option>
-                        <lui-select-option value="wave" selected>wave</lui-select-option>
-                        <lui-select-option value="fade">fade</lui-select-option>
-                    </lui-select>
-                    <lui-select label="Skeleton Text Align" width="100px" class="change-skeleton-align">
-                        <lui-select-option value="left" selected>left</lui-select-option>
-                        <lui-select-option value="center">center</lui-select-option>
-                        <lui-select-option value="right">right</lui-select-option>
-                    </lui-select>
-                    <lui-button class="change-skeleton-width">Change Width</lui-button>
-                    <lui-button class="change-skeleton-height">Change Height</lui-button>
-                    <lui-button class="change-skeleton-radius">Change Radius</lui-button>
-                    <lui-button class="change-skeleton-column-width">Change Column Widths</lui-button>
-                    <lui-button class="change-skeleton-column-align">Change Column Aligns</lui-button>
+                <lui-input class="change-toast-content" type="text" value="hello world">Toast Content</lui-input>
+                <lui-input class="change-toast-timeout" type="number" value="3000">Toast Timeout</lui-input>
+                <lui-toast message="connected" timeout="0" type="warning" class="lui-toast" position></lui-toast>
+                <div class="change-toast-position" style="display: flex; align-items: center;">
+                    <p>Toast Position</p>
+                    <lui-radio name="toastPosition" value="left-top">left-top</lui-radio>
+                    <lui-radio name="toastPosition" value="center-top" checked>center-top</lui-radio>
+                    <lui-radio name="toastPosition" value="right-top">right-top</lui-radio>
+                    <lui-radio name="toastPosition" value="left-center">left-center</lui-radio>
+                    <lui-radio name="toastPosition" value="center-center">center-center</lui-radio>
+                    <lui-radio name="toastPosition" value="right-center">right-center</lui-radio>
+                    <lui-radio name="toastPosition" value="left-bottom">left-bottom</lui-radio>
+                    <lui-radio name="toastPosition" value="center-bottom">center-bottom</lui-radio>
+                    <lui-radio name="toastPosition" value="right-bottom">right-bottom</lui-radio>
                 </div>
             </div>
         </div>
@@ -372,12 +309,23 @@
         let flyover;
         $on('.bt-toggle-flyover', 'click', function(e) {
 
+            const position = $('.st-position').value;
             const width = $('.st-flyover').value;
-            console.log(width);
+            console.log(position, width);
 
             if (!flyover) {
                 flyover = document.createElement('lui-flyover');
+                flyover.setAttribute('position', position);
                 flyover.setAttribute('width', width);
+                
+                const fbt = document.createElement('lui-button');
+                fbt.addEventListener('click', function() {
+                    flyover.close();
+                    flyover = null;
+                });
+                fbt.innerHTML = 'close';
+                flyover.appendChild(fbt);
+
                 document.body.appendChild(flyover);
                 return;
             }
@@ -396,7 +344,7 @@
             mbt.addEventListener('click', function() {
                 modal.remove();
             });
-            mbt.innerHTML = 'slot modal close button';
+            mbt.innerHTML = 'close';
             modal.appendChild(mbt);
 
             document.body.appendChild(modal);
@@ -512,131 +460,6 @@
             console.log(e.detail);
         });
 
-        // upload control
-        const $upload = document.querySelector('.lui-upload');
-        const $uploadMultiple = document.querySelector('.change-upload-multiple');
-        const $uploadDisabled = document.querySelector('.change-upload-disabled');
-        const $uploadDrag = document.querySelector('.change-upload-drag');
-        const $uploadAccept = document.querySelector('.change-upload-accept');
-        const $uploadFiles = document.querySelector('.change-upload-files');
-        const $uploadSize = document.querySelector('.change-upload-size');
-        const $uploadAmount = document.querySelector('.change-upload-amount');
-        $upload.addEventListener('change', (e) => {
-            console.log(e.detail);
-        });
-        $upload.addEventListener('warning', (e) => {
-            const detail = e.detail;
-            if (detail.type === 'size') {
-                console.log(`Max Size: ${detail.maxSize}`);
-            } else {
-                console.log(`Max Amount: ${detail.maxAmount}`);
-            }
-            console.log('Files: ');
-            console.log(detail.files);
-        });
-        $uploadMultiple.addEventListener('click', () => {
-            if ($upload.multiple) {
-                $upload.removeAttribute('multiple');
-                return;
-            }
-            $upload.setAttribute('multiple', 'multiple');
-        });
-        $uploadDisabled.addEventListener('click', () => {
-            if ($upload.disabled) {
-                $upload.removeAttribute('disabled');
-                return;
-            }
-            $upload.setAttribute('disabled', 'disabled');
-        });
-        $uploadDrag.addEventListener('click', () => {
-            if ($upload.fileDroppable) {
-                $upload.textContent = 'Click';
-                $upload.removeAttribute('file-droppable');
-                return;
-            }
-            $upload.textContent = 'Click or Drag';
-            $upload.setAttribute('file-droppable', 'file-droppable');
-        });
-        $uploadAccept.addEventListener('change', (e) => {
-            $upload.setAttribute('accept', e.detail);
-        });
-        $uploadFiles.addEventListener('click', () => {
-            $upload.setSelectedFiles([
-                {
-                    name: 'A file with a long name.js',
-                    size: 39080
-                }
-            ]);
-        });
-        $uploadSize.addEventListener('input', (e) => {
-            $upload.setAttribute('max-size', e.detail);
-        });
-        $uploadAmount.addEventListener('input', (e) => {
-            $upload.setAttribute('max-amount', e.detail);
-        });
-
-        // skeleton control
-        const $skeleton = document.querySelector('.lui-skeleton');
-        const $skeletonType = document.querySelector('.change-skeleton-type');
-        const $skeletonRows = document.querySelector('.change-skeleton-rows');
-        const $skeletonCols = document.querySelector('.change-skeleton-cols');
-        const $skeletonAnimation = document.querySelector('.change-skeleton-animation');
-        const $skeletonAlign = document.querySelector('.change-skeleton-align');
-        const $skeletonWidth = document.querySelector('.change-skeleton-width');
-        const $skeletonHeight = document.querySelector('.change-skeleton-height');
-        const $skeletonRadius = document.querySelector('.change-skeleton-radius');
-        const $skeletonColumnWidth = document.querySelector('.change-skeleton-column-width');
-        const $skeletonColumnAlign = document.querySelector('.change-skeleton-column-align');
-        $skeletonType.addEventListener('change', (e) => {
-            $skeleton.type = e.detail;
-        });
-        $skeletonRows.addEventListener('change', (e) => {
-            $skeleton.rows = e.detail;
-        });
-        $skeletonCols.addEventListener('change', (e) => {
-            $skeleton.cols = e.detail;
-        });
-        $skeletonAnimation.addEventListener('change', (e) => {
-            $skeleton.animation = e.detail;
-        });
-        $skeletonAlign.addEventListener('change', (e) => {
-            $skeleton.textAlign = e.detail;
-        });
-        $skeletonWidth.addEventListener('click', () => {
-            if ($skeleton.width) {
-                $skeleton.removeAttribute('width');
-                return;
-            }
-            $skeleton.setAttribute('width', '300px');
-        });
-        $skeletonHeight.addEventListener('click', () => {
-            if ($skeleton.height) {
-                $skeleton.removeAttribute('height');
-                return;
-            }
-            $skeleton.setAttribute('height', '300px');
-        });
-        $skeletonRadius.addEventListener('click', () => {
-            if ($skeleton.avatarRadius === '96px') {
-                $skeleton.setAttribute('avatar-radius', '64px');
-                return;
-            }
-            $skeleton.setAttribute('avatar-radius', '96px');
-        });
-        $skeletonColumnWidth.addEventListener('click', () => {
-            if ($skeleton.columnWidths) {
-                $skeleton.removeAttribute('column-widths');
-                return;
-            }
-            $skeleton.setAttribute('column-widths', '10%, 10%, , 200px');
-        });
-        $skeletonColumnAlign.addEventListener('click', () => {
-            if ($skeleton.columnAligns) {
-                $skeleton.removeAttribute('column-aligns');
-                return;
-            }
-            $skeleton.setAttribute('column-aligns', 'left, right, ,center');
-        });
     </script>
 </body>
 
