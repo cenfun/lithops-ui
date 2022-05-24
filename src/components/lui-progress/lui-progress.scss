@@ -1,12 +1,8 @@
 :host {
-    display: block;
+    display: inline-block;
 }
 
 .lui-progress {
-    width: 100px;
-    height: 15px;
     border: 1px solid #aaa;
-    border-radius: 3px;
     position: relative;
-    background: linear-gradient(#ccc 0 0) 0/0% no-repeat;
 }
