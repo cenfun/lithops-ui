@@ -8,6 +8,17 @@ import componentStyle from './lui-modal.scss';
 
 export default class extends LuiBase {
 
+    static properties = {
+        header: {
+            type: String
+        }
+    };
+
+    constructor() {
+        super();
+        this.header = '';
+    }
+
     connectedCallback() {
         super.connectedCallback();
         this.addStyle(componentStyle, 'lui-modal');
@@ -21,14 +32,20 @@ export default class extends LuiBase {
 
     render() {
 
+        let $header = '';
+        if (this.header) {
+            $header = html`
+                <div class="lui-modal-header">${this.header}</div>
+            `;
+        }
+
         return html`
+            <div class="lui-modal-mask" @click="${this.closeHandler}"></div>
             <div class="lui-modal">
                 <div class="lui-modal-main lui-flex-column">
-                    <div class="lui-modal-header">
-                        <slot name="header"></slot>
-                    </div>
+                    ${$header}
                     <div class="lui-modal-content lui-flex-auto">
-                        <slot name="content"></slot>
+                        <slot></slot>
                     </div>
                 </div>
                 <div class="lui-modal-close" @click="${this.closeHandler}">X</div>

@@ -377,7 +377,21 @@
             
         });
 
-        //bt-open-modal
+        // modal control
+        $on('.bt-open-modal', 'click', function(e) {
+
+            const modal = document.createElement('lui-modal');
+            modal.setAttribute('header', 'this is modal header');
+            const mbt = document.createElement('lui-button');
+            mbt.addEventListener('click', function() {
+                modal.remove();
+            });
+            mbt.innerHTML = 'slot modal close button';
+            modal.appendChild(mbt);
+
+            document.body.appendChild(modal);
+            
+        });
 
 
         // toast control
