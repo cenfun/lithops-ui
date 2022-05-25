@@ -5,8 +5,10 @@ import Util from '../../util/util.js';
 import LuiBase from '../../base/lui-base.js';
 import componentStyle from './lui-switch.scss';
 
+const defaultStates = ['', ''];
+const defaultColors = ['#aaaaaa', '#1890ff'];
 
-const DEFAULT_COLORS = ['#1890ff', '#aaa'];
+const defaultWidth = 'auto';
 
 export default class extends LuiBase {
 
@@ -14,18 +16,22 @@ export default class extends LuiBase {
         checked: {
             type: Boolean
         },
-        flags: {
-            type: String
+        states: {
+            type: String,
+            converter: (value) => {
+                const ls = `${value}`.split(',').map((it) => it.trim());
+                return [ls[0] || defaultStates[0], ls[1] || defaultStates[1]];
+            }
         },
         colors: {
-            type: String
-        },
-        width: {
-            type: Number,
-            state: true
+            type: String,
+            converter: (value) => {
+                const ls = `${value}`.split(',').map((it) => it.trim());
+                return [ls[0] || defaultColors[0], ls[1] || defaultColors[1]];
+            }
         },
         size: {
-            converter: (value, String) => {
+            converter: (value) => {
                 value = value.toLowerCase();
                 if (value === 's' || value === 'small') {
                     return 's';
@@ -35,37 +41,26 @@ export default class extends LuiBase {
                 }
                 return 'm';
             }
+        },
+        width: {
+            type: Number,
+            state: true
         }
     };
 
     constructor() {
         super();
         this.checked = false;
-        this.flags = '';
-        this.colors = '';
+        this.states = defaultStates;
+        this.colors = defaultColors;
         this.size = 'm';
-    }
-
-    get baseSize() {
-        if (this.size === 's') {
-            return 14;
-        }
-        if (this.size === 'l') {
-            return 18;
-        }
-        return 16;
-    }
-
-    updated() {
-        super.updated();
-        const checkedWidth = this.$('.lui-switch-button-checked-text').getBoundingClientRect().width;
-        const uncheckedWidth = this.$('.lui-switch-button-unchecked-text').getBoundingClientRect().width;
-        this.width = Math.max(checkedWidth, uncheckedWidth) + this.baseSize;
+        this.width = defaultWidth;
     }
 
     connectedCallback() {
         super.connectedCallback();
         this.addStyle(componentStyle, 'lui-switch');
+        //console.log(this.states, this.colors);
     }
 
     clickHandler() {
@@ -74,6 +69,15 @@ export default class extends LuiBase {
         }
         this.checked = !this.checked;
         this.emit('change', this.checked);
+    }
+
+    firstUpdated() {
+        //lock width
+        const br = this.$('.lui-switch-button').getBoundingClientRect();
+        const w = Math.ceil(br.width);
+
+        this.width = `${w}px`;
+        console.log(this.cid, br.width, this.width);
     }
 
     slotChangeHandler() {
@@ -89,48 +93,40 @@ export default class extends LuiBase {
         }
     }
 
-    /* eslint-disable complexity */
     render() {
-        //insert cid
-        const switchClassList = {
-            'lui-switch': true,
-            'lui-switch-small': this.size === 's',
-            'lui-switch-large': this.size === 'l'
-        };
+
+        const switchClassList = ['lui-switch', this.cid, `lui-switch-${this.size}`];
 
         const buttonClassList = {
             'lui-switch-button': true,
-            'lui-switch-button-checked': this.checked,
-            'lui-switch-button-disabled': this.disabled
+            'checked': this.checked,
+            'disabled': this.disabled
         };
 
-        const colors = this.colors.split(',').map((item) => item.trim());
         const buttonStyle = {
-            width: `${this.width + this.baseSize}px`,
-            'background-color': this.checked ? colors[0] || DEFAULT_COLORS[0] : colors[1] || DEFAULT_COLORS[1]
+            'width': this.width,
+            'background-color': this.checked ? this.colors[1] : this.colors[0]
         };
 
-        const leftFlagStyle = {
-            opacity: this.checked ? '1' : '0',
-            width: this.checked ? `${this.width}px` : '0',
-            color: this.checked ? '#fff' : 'transparent'
-        };
+        const $states = this.states.map((item, i) => {
 
-        const rightFlagStyle = {
-            opacity: this.checked ? '0' : '1',
-            width: this.checked ? '0' : `${this.width}px`,
-            color: this.checked ? 'transparent' : '#fff'
-        };
+            const stateCls = {
+                'lui-switch-state': true,
+                'checked': Boolean(i)
+            };
 
-        const flags = this.flags.split(',').map((item) => item.trim()) || [];
-        const $flags = html`
-            <div class="lui-switch-button-flag" style="${Util.styleMap(leftFlagStyle)}">
-                <span class="lui-switch-button-checked-text">${flags[0] || ''}</span>
-            </div>
-            <div class="lui-switch-button-flag" style="${Util.styleMap(rightFlagStyle)}">
-                <span class="lui-switch-button-unchecked-text">${flags[1] || ''}</span>
-            </div>
-        `;
+            if (this.width !== defaultWidth) {
+                let show = false;
+                if ((this.checked && i === 1) || (!this.checked && i === 0)) {
+                    show = true;
+                }
+
+                stateCls.show = show;
+                stateCls.hide = !show;
+            }
+            
+            return html`<div class="${Util.classMap(stateCls)}">${item}</div>`;
+        });
 
         return html`
             <div class="${Util.classMap(switchClassList)}">
@@ -138,8 +134,8 @@ export default class extends LuiBase {
                     <slot @slotchange="${this.slotChangeHandler}"></slot>
                 </div>
                 <div class="${Util.classMap(buttonClassList)}" style="${Util.styleMap(buttonStyle)}" @click=${this.clickHandler}>
-                    ${$flags}
-                    <div class="lui-switch-button-icon"></div>
+                    ${$states}
+                    <div class="lui-switch-icon"></div>
                 </div>
             </div>
         `;

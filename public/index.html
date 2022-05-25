@@ -179,7 +179,7 @@
         <div class="lui-item">
             <div class="lui-item-name">lui-progress</div>
             <div class="lui-item-example">
-                <lui-progress border-color="red"></lui-progress>
+                <lui-progress border-color="darkred"></lui-progress>
                 <lui-progress percentage="80" color="green" border-color="darkgreen"></lui-progress>
                 <lui-progress percentage="50" height="10px" width="200px"></lui-progress>
                 <lui-progress percentage="100"></lui-progress>
@@ -234,31 +234,15 @@
         <div class="lui-item">
             <div class="lui-item-name">lui-switch</div>
             <div class="lui-item-example">
-                <lui-switch class="lui-switch" checked>Label</lui-switch>
-                <span>Switch Flags</span>
-                <div class="change-switch-flags" style="display: inline-flex;">
-                    <lui-radio name="switchFlag" value="empty" checked>(Empty)</lui-radio>
-                    <lui-radio name="switchFlag" value="Yes,No">Yes/No</lui-radio>
-                    <lui-radio name="switchFlag" value="Open,Close">Open,Close</lui-radio>
-                    <lui-radio name="switchFlag" value="ON, OFF">ON/OFF</lui-radio>
-                </div>
-                <br>
-                <span>Switch Colors</span>
-                <div class="change-switch-colors" style="display: inline-flex;">
-                    <lui-radio name="switchColors" value="red, green">red/green</lui-radio>
-                    <lui-radio name="switchColors" value="#1890ff, #aaa" checked>Default</lui-radio>
-                    <lui-radio name="switchColors" value="">Empty</lui-radio>
-                    <lui-radio name="switchColors" value="ss">Wrong</lui-radio>
-                </div>
-                <br>
-                <span>Switch Size</span>
-                <div class="change-switch-size" style="display: inline-flex;">
-                    <lui-radio name="switchSize" value="s">s</lui-radio>
-                    <lui-radio name="switchSize" value="m" checked>m</lui-radio>
-                    <lui-radio name="switchSize" value="l">l</lui-radio>
-                </div>
-                <br>
-                <lui-button class="change-switch-disabled">Switch disabled</lui-button>
+                <lui-switch>switch:</lui-switch>
+                <lui-switch checked>checked:</lui-switch>
+                <lui-switch disabled>disabled:</lui-switch>
+                <lui-switch states="OFF, ON">states:</lui-switch>
+                <lui-switch states="Disabled ,Enabled" colors="darkred, green">colors:</lui-switch>
+                <lui-switch size="s">small:</lui-switch>
+                <lui-switch states=" No, Yes, " size="s" colors=",green"></lui-switch>
+                <lui-switch size="l">large:</lui-switch>
+                <lui-switch size="l" checked states="Close, Open"></lui-switch>
             </div>
         </div>
 

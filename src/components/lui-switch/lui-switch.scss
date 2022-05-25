@@ -1,103 +1,145 @@
+:host {
+    display: inline-block;
+}
+
 .lui-switch {
-    font-size: 13px;
     display: flex;
     align-items: center;
 
-    &-label {
-        display: none;
-        margin-right: 5px;
-    }
-
-    &-button {
-        height: 20px;
-        padding: 2px;
-        border-radius: 100px;
-        cursor: pointer;
-        transition: background-color 0.1s;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        &-icon {
-            width: 16px;
-            height: 16px;
-            border-radius: 100px;
-            background-color: #fff;
-            transition: left 0.1s ease-in-out;
-            position: absolute;
-            left: 2px;
-            top: 2px;
-        }
-
-        &-flag {
-            color: #fff;
-            height: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            text-align: center;
-            transition: opacity 0.1s ease-out;
-
-            span {
-                display: inline-block;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                line-height: 1;
-                vertical-align: middle;
-                user-select: none;
-            }
-        }
-    }
-
-    .lui-switch-button-checked {
-        .lui-switch-button-icon {
-            left: calc(100% - 18px);
-        }
-    }
-
-    .lui-switch-button-disabled {
-        cursor: not-allowed;
+    .disabled {
+        cursor: default;
         opacity: 0.5;
     }
+}
 
-    &.lui-switch-small {
-        font-size: 12px;
+.lui-switch-label {
+    display: none;
+    margin-right: 5px;
+}
 
-        .lui-switch-button {
-            height: 18px;
+.lui-switch-button {
+    cursor: pointer;
+    transition: background-color 0.1s;
+    position: relative;
+    box-sizing: border-box;
+}
 
-            &-icon {
-                height: 14px;
-                width: 14px;
-            }
-        }
+.lui-switch-state {
+    color: #fff;
+    user-select: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    transition: opacity 0.1s ease-out;
 
-        .lui-switch-button-checked {
-            .lui-switch-button-icon {
-                left: calc(100% - 16px);
-            }
-        }
+    &.hide {
+        display: none;
     }
 
-    &.lui-switch-large {
-        font-size: 14px;
+    &.show {
+        display: block;
+    }
+}
 
-        .lui-switch-button {
-            height: 22px;
+.lui-switch-icon {
+    border-radius: 50%;
+    background-color: #fff;
+    transition: left 0.1s ease-in-out;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
 
-            /* stylelint-disable-next-line no-descending-specificity */
-            &-icon {
-                height: 18px;
-                width: 18px;
-            }
+/* unchecked */
+
+.lui-switch-s {
+    font-size: 12px;
+
+    .lui-switch-button {
+        height: 18px;
+        line-height: 18px;
+        border-radius: 9px;
+    }
+
+    .lui-switch-icon {
+        height: 14px;
+        width: 14px;
+    }
+
+    .lui-switch-state {
+        min-width: 33px;
+        padding: 0 5px 0 19px;
+
+        &.checked {
+            padding: 0 19px 0 5px;
         }
+    }
+}
 
-        .lui-switch-button-checked {
-            .lui-switch-button-icon {
-                left: calc(100% - 20px);
-            }
+.lui-switch-m {
+    font-size: 13px;
+
+    .lui-switch-button {
+        height: 20px;
+        line-height: 20px;
+        border-radius: 10px;
+    }
+
+    .lui-switch-icon {
+        height: 16px;
+        width: 16px;
+    }
+
+    .lui-switch-state {
+        min-width: 35px;
+        padding: 0 5px 0 21px;
+
+        &.checked {
+            padding: 0 21px 0 5px;
         }
+    }
+}
+
+.lui-switch-l {
+    font-size: 14px;
+
+    .lui-switch-button {
+        height: 22px;
+        line-height: 22px;
+        border-radius: 11px;
+    }
+
+    .lui-switch-icon {
+        height: 18px;
+        width: 18px;
+    }
+
+    .lui-switch-state {
+        min-width: 37px;
+        padding: 0 5px 0 23px;
+
+        &.checked {
+            padding: 0 23px 0 5px;
+        }
+    }
+}
+
+/* checked */
+.lui-switch-s .checked {
+    .lui-switch-icon {
+        left: calc(100% - 16px);
+    }
+}
+
+.lui-switch-m .checked {
+    .lui-switch-icon {
+        left: calc(100% - 18px);
+    }
+}
+
+.lui-switch-l .checked {
+    .lui-switch-icon {
+        left: calc(100% - 20px);
     }
 }
