@@ -220,6 +220,14 @@
 
                 <lui-select label="disabled:" disabled>
                 </lui-select>
+
+                <lui-select label="long:">
+                    <option></option>
+                    <option deletable value="long">this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long! this label is long!</option>
+                    <option>short</option>
+                    <option deletable value="withoutbreak">cannotbreakwordsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</option>
+                    <option value="break">break word sssssssssss  ssssssssssss sssssssss sss ssssssssssss ssssssssss sssssssssss sssssssss sssssss</option>
+                </lui-select>
             </div>
         </div>
 
@@ -384,8 +392,15 @@
         });
 
 
-        $$on('lui-select', 'change', (e) => {
-            console.log('select change', e.detail);
+        // selete control
+        $$on('lui-select', 'change', function(e) {
+            console.log(this.cid, 'change', e.detail);
+        });
+        $$on('lui-select', 'input', function(e) {
+            console.log(this.cid, 'input', e.detail);
+        });
+        $$on('lui-select', 'delete', function(e) {
+            console.log(this.cid, 'delete', e.detail);
         });
 
 

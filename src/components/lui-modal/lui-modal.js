@@ -5,7 +5,7 @@ import { html } from 'lit';
 import LuiBase from '../../base/lui-base.js';
 import componentStyle from './lui-modal.scss';
 
-
+import generateIcon from '../../util/generate-icon.js';
 export default class extends LuiBase {
 
     static properties = {
@@ -48,7 +48,7 @@ export default class extends LuiBase {
                         <slot></slot>
                     </div>
                 </div>
-                <div class="lui-modal-close" @click="${this.closeHandler}">X</div>
+                <div class="lui-modal-close" @click="${this.closeHandler}">${generateIcon('x')}</div>
             </div>
         `;
     }

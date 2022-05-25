@@ -6,6 +6,8 @@ import LuiBase from '../../base/lui-base';
 
 import componentStyle from './lui-select.scss';
 import componentListStyle from './lui-select-list.scss';
+
+import generateIcon from '../../util/generate-icon.js';
 export default class extends LuiBase {
 
     static properties = {
@@ -82,6 +84,10 @@ export default class extends LuiBase {
         this.addStyle(componentListStyle, 'lui-select-list');
         //for global style
         this.addStyle(componentListStyle, 'lui-select-list', true);
+
+        if (this.options) {
+            this.initOptions(this.options);
+        }
     }
 
     firstUpdated() {
@@ -143,10 +149,10 @@ export default class extends LuiBase {
         if (!this.list) {
             return;
         }
-        
-        document.body.appendChild(this.$list);
 
         this.isOpen = true;
+        
+        document.body.appendChild(this.$list);
 
         this.layout();
 
@@ -200,7 +206,7 @@ export default class extends LuiBase {
         this.unbindEvents();
         this.$list.remove();
         if (this.focusOnClose) {
-            console.log('view focus');
+            //console.log('view focus');
             this.$view.focus();
             this.focusOnClose = false;
         }
@@ -212,6 +218,10 @@ export default class extends LuiBase {
     }
 
     onFocus(e) {
+        if (this.input) {
+            e.currentTarget.select();
+        }
+
         //console.log(e.type);
         if (this.focusOnClose) {
             return;
@@ -231,15 +241,27 @@ export default class extends LuiBase {
 
         this.focusOnClose = true;
 
-        //target for deletable
-        const $elem = e.currentTarget;
-        const index = $elem.getAttribute('index');
+        const index = e.currentTarget.getAttribute('index');
         if (!index) {
             //console.log('clicked index', index);
             return;
         }
+
         const clickedItem = this.list[index];
-        if (!clickedItem || clickedItem === this.selectedItem) {
+        if (!clickedItem) {
+            return;
+        }
+
+        //delete item
+        const isDeleteIcon = e.target.classList.contains('lui-select-item-delete');
+        if (isDeleteIcon) {
+            this.emit('delete', clickedItem);
+            return;
+        }
+
+        //change select item
+        if (clickedItem === this.selectedItem) {
+            //no change
             return;
         }
 
@@ -258,6 +280,26 @@ export default class extends LuiBase {
 
     }
 
+    onItemDelete(e) {
+        //stop click item
+        e.stopImmediatePropagation();
+
+        
+        //this.emit('delete', );
+
+    }
+
+    onInput(e) {
+        if (!this.input) {
+            return;
+        }
+        //stop input default input
+        e.stopImmediatePropagation();
+        const v = e.currentTarget.value;
+        //console.log(this.cid, v);
+        this.emit('input', v);
+    }
+
     initList(list) {
         if (!list.length) {
             return;
@@ -274,9 +316,9 @@ export default class extends LuiBase {
             }
         });
 
-        this.setSelected(selectedIndex);
+        //console.log('initList');
 
-        //console.log(this.list, this.value);
+        this.setSelected(selectedIndex);
     }
 
     setSelected(selectedIndex = 0) {
@@ -289,10 +331,12 @@ export default class extends LuiBase {
             this.selectedItem.selected = true;
             this.value = this.selectedItem.value;
         }
+
         this.emit('change', this.selectedItem);
     }
 
     initOptions(options) {
+        //console.log('initOptions');
         const dataOptions = Array.from(options).map((item) => {
             if (item && typeof item === 'object') {
                 const label = item.label;
@@ -300,14 +344,21 @@ export default class extends LuiBase {
                 if (Util.isInvalid(value)) {
                     value = label;
                 }
-                const selected = Boolean(item.selected);
-                const deletable = Boolean(item.deletable);
-                return {
+
+                const option = {
                     label,
-                    value,
-                    selected,
-                    deletable
+                    value
                 };
+
+                if (item.selected) {
+                    option.selected = true;
+                }
+                if (item.deletable) {
+                    option.deletable = true;
+                }
+
+                return option;
+
             }
             return {
                 label: item,
@@ -318,6 +369,7 @@ export default class extends LuiBase {
     }
 
     slotChangeHandler(e) {
+        //console.log('slotChangeHandler');
         const childNodes = e.target.assignedNodes({
             flatten: true
         }).filter((elem) => elem.nodeType === 1);
@@ -329,15 +381,22 @@ export default class extends LuiBase {
             if (value === null) {
                 value = label;
             }
-            //selected only has key
-            const selected = elem.getAttribute('selected') !== null;
-            const deletable = elem.getAttribute('deletable') !== null;
-            slotOptions.push({
+            const option = {
                 label,
-                value,
-                selected,
-                deletable
-            });
+                value
+            };
+            
+            //selected only has key
+            const selected = elem.getAttribute('selected');
+            const deletable = elem.getAttribute('deletable');
+            if (selected !== null) {
+                option.selected = true;
+            }
+            if (deletable !== null) {
+                option.deletable = true;
+            }
+
+            slotOptions.push(option);
         });
         this.initList(slotOptions);
     }
@@ -352,9 +411,8 @@ export default class extends LuiBase {
         }
 
         let $options = '';
-        if (this.options) {
-            this.initOptions(this.options);
-        } else {
+        //init list from slot
+        if (!this.options) {
             $options = html`
             <div class="lui-select-options">
                 <slot @slotchange="${this.slotChangeHandler}"></slot>
@@ -373,7 +431,7 @@ export default class extends LuiBase {
                 }
                 let $delete = '';
                 if (item.deletable) {
-                    $delete = html`<div class="lui-select-item-delete" @click="${this.onItemDelete}"></div>`;
+                    $delete = html`<div class="lui-select-item-delete">${generateIcon('x')}</div>`;
                 }
                 return html`
                     <div class="${Util.classMap(cls)}" index="${item.index}" @mousedown="${this.onItemClick}">
@@ -393,6 +451,11 @@ export default class extends LuiBase {
             width: this._viewWidth ? `${this._viewWidth}` : null
         };
 
+        let label = '';
+        if (this.selectedItem) {
+            label = this.selectedItem.label;
+        }
+
         return html`
             <div class="lui-select ${this.cid}">
                 ${$label}
@@ -400,12 +463,13 @@ export default class extends LuiBase {
                     type="text"
                     class="${Util.classMap(viewCls)}"
                     style="${Util.styleMap(viewStm)}"
-                    value="${this.value}"
+                    value="${label}"
                     .disabled="${this.disabled}"
                     ?readonly="${!this.input}"
                     @click="${this.onClick}"
                     @focus="${this.onFocus}"
                     @blur="${this.onBlur}"
+                    @input="${this.onInput}"
                 />
             </div>
             ${$options}

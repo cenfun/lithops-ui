@@ -11,6 +11,25 @@
     box-shadow: 0 2px 3px 0 rgb(0 0 0 / 20%);
 }
 
+.lui-select-item-label {
+    min-height: 1rem;
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.lui-select-item-delete {
+    position: relative;
+    cursor: pointer;
+    width: 25px;
+    height: 20px;
+    visibility: hidden;
+
+    &:hover {
+        color: #000;
+    }
+}
+
 .lui-select-item {
     padding: 8px 5px;
     position: relative;
@@ -34,41 +53,13 @@
         background: #e8e8e8;
     }
 
+    &:hover .lui-select-item-delete {
+        visibility: visible;
+    }
+
     &.selected:hover {
         background: #555;
     }
-}
-
-.lui-select-item-label {
-    min-height: 1rem;
-    flex: 1;
-}
-
-.lui-select-item-delete {
-    position: relative;
-    cursor: pointer;
-    width: 20px;
-    height: 100%;
-    visibility: hidden;
-
-    &::after {
-        content: "X";
-        font-size: 18px;
-        font-weight: bold;
-        position: absolute;
-        color: currentcolor;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    &:hover {
-        color: #000;
-    }
-}
-
-.lui-select-item:hover .lui-select-item-delete {
-    visibility: visible;
 }
 
 .lui-select-item.selected .lui-select-item-delete:hover {
