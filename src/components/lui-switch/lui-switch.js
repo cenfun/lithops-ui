@@ -77,7 +77,7 @@ export default class extends LuiBase {
         const w = Math.ceil(br.width);
 
         this.width = `${w}px`;
-        console.log(this.cid, br.width, this.width);
+        //console.log(this.cid, br.width, this.width);
     }
 
     slotChangeHandler() {
