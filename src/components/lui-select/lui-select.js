@@ -39,6 +39,40 @@ export default class extends LuiBase {
         this.input = false;
 
         this._viewWidth = '45px';
+
+        this.initEvents();
+    }
+
+    initEvents() {
+
+        this.resizeHandler = (e) => {
+            //console.log('resizeHandler');
+            this.close();
+        };
+
+        this.scrollHandler = (e) => {
+            //console.log('scrollHandler', e.target);
+            if (Util.isChildNode(e.target, this.$list)) {
+                return;
+            }
+            if (!Util.isParentNode(e.target, this)) {
+                return;
+            }
+            this.close();
+        };
+
+    }
+
+    unbindEvents() {
+        //console.log('unbindEvents');
+        window.removeEventListener('resize', this.resizeHandler);
+        window.removeEventListener('scroll', this.scrollHandler, true);
+    }
+
+    bindEvents() {
+        this.unbindEvents();
+        window.addEventListener('resize', this.resizeHandler);
+        window.addEventListener('scroll', this.scrollHandler, true);
     }
 
     connectedCallback() {
@@ -111,13 +145,12 @@ export default class extends LuiBase {
         }
         
         document.body.appendChild(this.$list);
-        //this.$list.focus();
 
         this.isOpen = true;
 
         this.layout();
 
-        //this.bindEvents();
+        this.bindEvents();
 
     }
 
@@ -164,8 +197,13 @@ export default class extends LuiBase {
 
     close() {
         this.isOpen = false;
-        //this.unbindEvents();
+        this.unbindEvents();
         this.$list.remove();
+        if (this.focusOnClose) {
+            console.log('view focus');
+            this.$view.focus();
+            this.focusOnClose = false;
+        }
     }
 
     onClick(e) {
@@ -175,6 +213,9 @@ export default class extends LuiBase {
 
     onFocus(e) {
         //console.log(e.type);
+        if (this.focusOnClose) {
+            return;
+        }
         this.open();
     }
 
@@ -188,7 +229,7 @@ export default class extends LuiBase {
     onItemClick(e) {
         //console.log(e.type, 'onItemClick');
 
-        this.closeAsync();
+        this.focusOnClose = true;
 
         //target for deletable
         const $elem = e.currentTarget;
@@ -368,7 +409,7 @@ export default class extends LuiBase {
                 />
             </div>
             ${$options}
-            <div class="lui-select-list" tabindex="0">
+            <div class="lui-select-list">
                 ${$items}
             </div>
         `;

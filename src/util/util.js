@@ -59,6 +59,33 @@ const Util = {
         return false;
     },
 
+    isChildNode(node, target) {
+        if (!node || !target) {
+            return false;
+        }
+        if (target === node) {
+            return true;
+        }
+        if (typeof target.contains === 'function') {
+            return target.contains(node);
+        }
+        return false;
+    },
+
+    isParentNode(node, target) {
+        if (!node || !target) {
+            return false;
+        }
+        let parent = target.parentNode;
+        while (parent) {
+            if (parent === node) {
+                return true;
+            }
+            parent = parent.parentNode;
+        }
+        return false;
+    },
+
     classMap(obj) {
         if (Array.isArray(obj)) {
             return obj.join(' ');
