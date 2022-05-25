@@ -5,25 +5,10 @@ import baseStyle from './lui-base.scss';
 let uid = 1;
 class LuiBase extends LitElement {
 
-    //must be override
+    //for static class, not instance tagName
     static tagName = '';
     
     static properties = {
-        instanceId: {
-            attribute: 'instance-id',
-            type: String
-        },
-        dataId: {
-            attribute: 'data-id',
-            type: String
-        },
-        data: {
-            attribute: false
-        },
-        // active: {
-        //     type: Boolean,
-        //     reflect: true
-        // }
         label: {
             type: String
         },
@@ -34,8 +19,10 @@ class LuiBase extends LitElement {
 
     constructor() {
         super();
+        //unique id
         this.uid = `${uid++}`;
-        this.instanceId = `lui-${this.uid}`;
+        //component id, instance id, lui-name-uid
+        this.cid = `${this.tagName.toLowerCase()}-${this.uid}`;
         this.label = '';
         this.disabled = false;
     }

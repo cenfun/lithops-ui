@@ -1,0 +1,76 @@
+.lui-select-list {
+    position: fixed;
+    background-color: #fff;
+    z-index: 10000;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    max-width: 350px;
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 0 2px 3px 0 rgb(0 0 0 / 20%);
+}
+
+.lui-select-item {
+    padding: 8px 5px;
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &:nth-last-child(1) {
+        border-bottom: none;
+    }
+
+    &.selected {
+        background: #666;
+        color: #fff;
+    }
+
+    &:hover {
+        background: #e8e8e8;
+    }
+
+    &.selected:hover {
+        background: #555;
+    }
+}
+
+.lui-select-item-label {
+    min-height: 1rem;
+    flex: 1;
+}
+
+.lui-select-item-delete {
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    height: 100%;
+    visibility: hidden;
+
+    &::after {
+        content: "X";
+        font-size: 18px;
+        font-weight: bold;
+        position: absolute;
+        color: currentcolor;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+        color: #000;
+    }
+}
+
+.lui-select-item:hover .lui-select-item-delete {
+    visibility: visible;
+}
+
+.lui-select-item.selected .lui-select-item-delete:hover {
+    color: #fff;
+}

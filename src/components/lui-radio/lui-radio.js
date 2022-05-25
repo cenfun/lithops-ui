@@ -75,20 +75,17 @@ export default class extends LuiBase {
     }
 
     render() {
-
-        const cid = `lui-radio-${this.uid}`;
-
         return html`
-            <div class="lui-radio">
+            <div class="lui-radio ${this.cid}">
                 <input
                     .checked="${this.checked}"
                     .disabled="${this.disabled}"
-                    id="${cid}"
+                    id="${this.cid}"
                     value="${this.value}"
                     type="radio"
                     @change="${this.changeHandler}"
                 >
-                <label for="${cid}">
+                <label for="${this.cid}">
                     <slot></slot>
                 </label>
             </div>

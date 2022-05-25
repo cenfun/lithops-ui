@@ -191,6 +191,7 @@ export default class extends LuiBase {
     
     /* eslint-disable complexity */
     render() {
+        //insert cid
         const classList = {
             'lui-toast': true
         };

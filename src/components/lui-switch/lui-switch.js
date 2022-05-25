@@ -91,6 +91,7 @@ export default class extends LuiBase {
 
     /* eslint-disable complexity */
     render() {
+        //insert cid
         const switchClassList = {
             'lui-switch': true,
             'lui-switch-small': this.size === 's',

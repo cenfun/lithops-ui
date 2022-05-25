@@ -160,20 +160,21 @@ export default class extends LuiBase {
                 ${$tabs}
             `;
         }
-
-        const fh = this.fullHeight ? ' lui-tab-full-height' : '';
+        
+        const cls = ['lui-tab', this.cid];
+        if (this.fullHeight) {
+            cls.push('lui-tab-full-height');
+        }
 
         return html`
-    
-        <div class="lui-tab${fh}">
-            <div class="lui-tab-header flex-row">
-                ${$header}
+            <div class="${Util.classMap(cls)}">
+                <div class="lui-tab-header flex-row">
+                    ${$header}
+                </div>
+                <div class="lui-tab-panes">
+                    <slot name="pane" @slotchange="${this.slotChangeHandler}"></slot>
+                </div>
             </div>
-            <div class="lui-tab-panes">
-                <slot name="pane" @slotchange="${this.slotChangeHandler}"></slot>
-            </div>
-        </div>
-        
         `;
     }
 

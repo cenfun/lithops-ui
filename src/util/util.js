@@ -30,6 +30,10 @@ const Util = {
         return num;
     },
 
+    clamp: function(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+    },
+
     isList: (data) => {
         if (data && Array.isArray(data) && data.length > 0) {
             return true;
@@ -41,6 +45,13 @@ const Util = {
         return Object.prototype.hasOwnProperty.call(obj, key);
     },
 
+    isInvalid(value) {
+        if (value === null || typeof value === 'undefined') {
+            return true;
+        }
+        return false;
+    },
+
     isCE($elem) {
         if ($elem && $elem.tagName && $elem.tagName.includes('-')) {
             return true;
@@ -49,6 +60,9 @@ const Util = {
     },
 
     classMap(obj) {
+        if (Array.isArray(obj)) {
+            return obj.join(' ');
+        }
         const ls = [];
         if (obj) {
             Object.keys(obj).forEach((key) => {
@@ -61,12 +75,15 @@ const Util = {
     },
 
     styleMap(obj) {
+        if (Array.isArray(obj)) {
+            return obj.join(' ');
+        }
         const ls = [];
         if (obj) {
             Object.keys(obj).forEach((key) => {
                 const v = obj[key];
                 if (v || v === 0) {
-                    ls.push(`${key}:${v};`);
+                    ls.push(`${key}: ${v};`);
                 }
             });
         }

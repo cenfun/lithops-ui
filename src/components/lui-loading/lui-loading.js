@@ -39,7 +39,7 @@ export default class extends LuiBase {
     }
 
     getClassList() {
-        const ls = ['lui-loading'];
+        const ls = ['lui-loading', this.cid];
         if (this.fast) {
             ls.push('lui-loading-fast');
         }

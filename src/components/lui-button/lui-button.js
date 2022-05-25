@@ -34,7 +34,7 @@ export default class extends LuiBase {
         //console.log('settings', this.settings);
         ///console.log('labels', this.labels);
 
-        const classList = ['lui-button'];
+        const classList = ['lui-button', this.cid];
         if (this.primary) {
             classList.push('lui-button-primary');
         }

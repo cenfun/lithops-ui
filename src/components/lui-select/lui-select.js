@@ -3,272 +3,373 @@ import { html } from 'lit';
 import Util from '../../util/util.js';
 
 import LuiBase from '../../base/lui-base';
+
 import componentStyle from './lui-select.scss';
-
-
+import componentListStyle from './lui-select-list.scss';
 export default class extends LuiBase {
 
     static properties = {
         label: {
             type: String
         },
-        focus: {
-            type: Boolean,
-            state: true
-        },
-        dropdownDisplayed: {
-            type: Boolean,
-            state: true
-        },
-        multiple: {
+        input: {
             type: Boolean
         },
         width: {
             type: String
         },
         options: {
-            type: Array,
+            type: Array
+        },
+        list: {
+            type: Array
+        },
+        value: {
+            type: String
+        },
+
+        _viewWidth: {
             state: true
         }
     };
 
     constructor() {
         super();
-        this.dropdownDisplayed = false;
-        this.focus = false;
-        this.multiple = false;
-        this.selectedOptions = [];
-        this.width = '200px';
+        this.value = '';
+        this.input = false;
+
+        this._viewWidth = '45px';
     }
 
     connectedCallback() {
         super.connectedCallback();
         this.addStyle(componentStyle, 'lui-select');
+        //for width generating
+        this.addStyle(componentListStyle, 'lui-select-list');
+        //for global style
+        this.addStyle(componentListStyle, 'lui-select-list', true);
     }
 
     firstUpdated() {
-        this.dataOptions = this.options;
+        this.$view = this.$('.lui-select-view');
+        this.$list = this.$('.lui-select-list');
+        this.updateViewWidth();
     }
 
-    setOptions(options) {
-        const mapOptions = options.map((option) => {
-            const value = option.value;
-            const text = option.text;
-            const label = option.label || text;
-            const key = option.key || value || label;
-            return {
-                key, value, label, text
-            };
-        });
-        this.options = mapOptions;
-        this.dataOptions = mapOptions;
-        this.$dropdown?.requestUpdate();
+    updated() {
+        this.updateViewWidth();
     }
 
-    childChangeHandler(e) {
-        if (this.multiple) {
-            clearTimeout(this.timeoutCloseDropdown);
-            const index = this.selectedOptions.findIndex((item) => {
-                return item.key === e.detail.key;
-            });
-            if (index >= 0) {
-                this.selectedOptions.splice(index, 1);
+    updateViewWidth() {
+
+        if (this._viewWidthUpdated) {
+            return;
+        }
+
+        if (this.width) {
+            this._viewWidth = this.width;
+            this._viewWidthUpdated = true;
+            return;
+        }
+
+        if (!this.list) {
+            return;
+        }
+
+        if (!this.$list) {
+            return;
+        }
+
+        const iconWidth = 15;
+        const listMinWidth = 45;
+        const listMaxWidth = 300;
+        
+        const listRect = this.$list.getBoundingClientRect();
+        //console.log(this.cid, listRect.width);
+        const vw = Util.clamp(Math.ceil(listRect.width) + iconWidth, listMinWidth, listMaxWidth);
+
+        this._viewWidth = `${vw}px`;
+        this._viewWidthUpdated = true;
+
+        //console.log(this._viewWidth);
+
+        
+    }
+
+    open() {
+
+        if (this.isOpen) {
+            return;
+        }
+
+        if (this.disabled) {
+            return;
+        }
+
+        if (!this.list) {
+            return;
+        }
+        
+        document.body.appendChild(this.$list);
+        //this.$list.focus();
+
+        this.isOpen = true;
+
+        this.layout();
+
+        //this.bindEvents();
+
+    }
+
+    layout() {
+        if (!this.isOpen) {
+            return;
+        }
+
+        const viewRect = this.$view.getBoundingClientRect();
+        const listRect = this.$list.getBoundingClientRect();
+        const bodyRect = document.body.getBoundingClientRect();
+
+        const spacing = 2;
+
+        let top = Math.max(viewRect.top + viewRect.height + spacing, 0);
+        if (viewRect.top + viewRect.height + listRect.height > bodyRect.height) {
+            top = viewRect.top - listRect.height - spacing;
+        }
+
+        let left = Math.max(viewRect.left, 0);
+        if (left + listRect.width > bodyRect.width) {
+            left = bodyRect.width - listRect.width;
+        }
+
+        const st = this.$list.style;
+        st.left = `${left}px`;
+        st.top = `${top}px`;
+        st.minWidth = `${viewRect.width}px`;
+
+        //selected element.scrollIntoView();
+        const $selected = this.$list.querySelector('.lui-select-item.selected');
+        if ($selected) {
+            $selected.scrollIntoView();
+        }
+
+    }
+
+    closeAsync() {
+        clearTimeout(this.timeout_close);
+        this.timeout_close = setTimeout(() => {
+            this.close();
+        }, 10);
+    }
+
+    close() {
+        this.isOpen = false;
+        //this.unbindEvents();
+        this.$list.remove();
+    }
+
+    onClick(e) {
+        //console.log(e.type);
+        this.open();
+    }
+
+    onFocus(e) {
+        //console.log(e.type);
+        this.open();
+    }
+
+    onBlur(e) {
+        // console.log(e.type);
+        if (this.isOpen) {
+            this.closeAsync();
+        }
+    }
+
+    onItemClick(e) {
+        //console.log(e.type, 'onItemClick');
+
+        this.closeAsync();
+
+        //target for deletable
+        const $elem = e.currentTarget;
+        const index = $elem.getAttribute('index');
+        if (!index) {
+            //console.log('clicked index', index);
+            return;
+        }
+        const clickedItem = this.list[index];
+        if (!clickedItem || clickedItem === this.selectedItem) {
+            return;
+        }
+
+        let selectedIndex = 0;
+        this.list.forEach((item, i) => {
+            if (item === clickedItem) {
+                selectedIndex = i;
+                item.selected = true;
             } else {
-                this.selectedOptions.push(e.detail);
+                item.selected = false;
             }
-        } else {
-            this.selectedOptions = [];
-            this.selectedOptions.push(e.detail);
-        }
-        this.requestUpdate();
-        this.updateComplete.then(() => {
-            this.$dropdown.parentRect = this.$('.lui-select-value').getBoundingClientRect();
-            this.$dropdown.requestUpdate();
         });
-        clearTimeout(this.timeoutBlur);
-        this.$dropdown.childNodes.forEach((child) => {
-            if (child !== e.target) {
-                child.removeAttribute('selected');
+
+        this.setSelected(selectedIndex);
+        //console.log(this.selectedItem);
+
+    }
+
+    initList(list) {
+        if (!list.length) {
+            return;
+        }
+
+        this.list = list;
+
+        let selectedIndex = 0;
+        list.forEach((item, index) => {
+            item.index = index;
+            if (item.selected) {
+                item.selected = false;
+                selectedIndex = index;
             }
-            e.target.setAttribute('selected', 'selected');
         });
-        this.$('.lui-select-value').focus();
-        
-        this.emitChange();
+
+        this.setSelected(selectedIndex);
+
+        //console.log(this.list, this.value);
     }
 
-    emitChange() {
-        let detail = this.selectedOptions[0]?.value;
-        if (this.multiple) {
-            detail = this.selectedOptions.map((item) => {
-                return item.value;
-            });
-        }
-        this.emit('change', detail);
-    }
-
-    switchDropdown() {
-        if (this.disabled) {
+    setSelected(selectedIndex = 0) {
+        if (!this.list) {
             return;
         }
-        if (this.dropdownDisplayed) {
-            this.closeDropdown();
-            return;
+        this.selectedIndex = selectedIndex;
+        this.selectedItem = this.list[selectedIndex];
+        if (this.selectedItem) {
+            this.selectedItem.selected = true;
+            this.value = this.selectedItem.value;
         }
-        this.showDropdown();
+        this.emit('change', this.selectedItem);
     }
 
-    showDropdown() {
-        this.focus = true;
-        if (!this.dataOptions || this.dataOptions.length === 0) {
-            return;
-        }
-        const clientRect = this.$('.lui-select-value').getBoundingClientRect();
-        const $dropdown = document.createElement('lui-select-dropdown');
-        $dropdown.parentRect = clientRect;
-        $dropdown.options = this.dataOptions;
-        $dropdown.selectedOptions = this.selectedOptions;
-        $dropdown.addEventListener('change', (e) => {
-            this.childChangeHandler(e);
-        });
-        this.$dropdown = $dropdown;
-        document.body.appendChild(this.$dropdown);
-        this.dropdownDisplayed = true;
-    }
-
-    blurHandler() {
-        this.timeoutBlur = setTimeout(() => {
-            this.focus = false;
-        }, 200);
-        if (!this.multiple) {
-            this.closeDropdown();
-            return;
-        }
-        this.timeoutCloseDropdown = setTimeout(() => {
-            this.closeDropdown();
-        }, 200);
-    }
-
-    closeDropdown() {
-        if (!this.$dropdown || !this.dropdownDisplayed) {
-            return;
-        }
-        this.$dropdown.classList.add('lui-select-dropdown-leave');
-        setTimeout(() => {
-            this.$dropdown.classList.remove('lui-select-dropdown-leave');
-            this.$dropdown.remove();
-            this.dropdownDisplayed = false;
-        }, 200);
-    }
-
-    slotChangeHandler() {
-        clearTimeout(this.timeoutSlotChange);
-        this.timeoutSlotChange = setTimeout(() => {
-            this.afterSlotChange();
-        }, 0);
-    }
-
-    afterSlotChange() {
-        const $slot = this.$('slot');
-        if (!$slot) {
-            return;
-        }
-        const $options = $slot.assignedElements();
-        const options = [];
-        $options.forEach((option) => {
-            const item = {
-                key: option.key || option.value || option.innerText,
-                value: (option.hasAttribute('value') || option.value) ? option.value : option.innerText,
-                text: option.innerText,
-                label: option.label || option.innerText
+    initOptions(options) {
+        const dataOptions = Array.from(options).map((item) => {
+            if (item && typeof item === 'object') {
+                const label = item.label;
+                let value = item.value;
+                if (Util.isInvalid(value)) {
+                    value = label;
+                }
+                const selected = Boolean(item.selected);
+                const deletable = Boolean(item.deletable);
+                return {
+                    label,
+                    value,
+                    selected,
+                    deletable
+                };
+            }
+            return {
+                label: item,
+                value: item
             };
-            options.push(item);
-            if (option.selected) {
-                this.selectedOptions.push(item);
-                this.requestUpdate();
-            }
         });
-        this.dataOptions = options;
+        this.initList(dataOptions);
     }
 
-    deleteSelectedItem(e, item) {
-        e.stopPropagation();
-        if (this.disabled) {
-            return;
-        }
-        this.selectedOptions.splice(this.selectedOptions.indexOf(item), 1);
-        this.requestUpdate();
-        if (this.dropdownDisplayed) {
-            this.updateComplete.then(() => {
-                this.$dropdown.parentRect = this.$('.lui-select-value').getBoundingClientRect();
-                this.$dropdown.requestUpdate();
+    slotChangeHandler(e) {
+        const childNodes = e.target.assignedNodes({
+            flatten: true
+        }).filter((elem) => elem.nodeType === 1);
+        const slotOptions = [];
+        childNodes.forEach((elem) => {
+            const label = elem.innerText;
+            //value could be (empty)
+            let value = elem.getAttribute('value');
+            if (value === null) {
+                value = label;
+            }
+            //selected only has key
+            const selected = elem.getAttribute('selected') !== null;
+            const deletable = elem.getAttribute('deletable') !== null;
+            slotOptions.push({
+                label,
+                value,
+                selected,
+                deletable
             });
-        }
-        
-        this.emitChange();
+        });
+        this.initList(slotOptions);
     }
 
     render() {
-        const labelClassList = {
-            'lui-select-label': true,
-            'lui-select-label-show': this.label
-        };
-        
-        const inputClassList = {
-            'lui-select-value': true,
-            'lui-select-value-focus': this.focus,
-            'lui-select-value-disabled': this.disabled
-        };
 
-        let value;
-        if (this.multiple) {
-            value = this.selectedOptions.map((item) => {
-                const label = item.label;
-                return html`
-                    <div class="lui-select-selected-item">
-                        ${label}
-                        <svg 
-                            class="lui-select-selected-item-delete"
-                            @click="${(e) => this.deleteSelectedItem(e, item)}"
-                            viewBox="0,0,4,4"
-                        >
-                            <line x1="0" y1="0" x2="4" y2="4"></line>
-                            <line x1="0" y1="4" x2="4" y2="0"></line>
-                        </svg>
-                    </div>
-                `;
-            });
-        } else {
-            const label = this.selectedOptions[0]?.label;
-            value = html`<div class="lui-select-selected-item">${label}</div>`;
-        }
-
-        let optionsSlot;
-        if (!this.options) {
-            optionsSlot = html`
-                <div class="lui-select-options">
-                    <slot @slotchange="${this.slotChangeHandler}">
-                    </slot>
-                </div>
+        let $label = '';
+        if (this.label) {
+            $label = html`
+                <label>${this.label}</label>
             `;
         }
 
+        let $options = '';
+        if (this.options) {
+            this.initOptions(this.options);
+        } else {
+            $options = html`
+            <div class="lui-select-options">
+                <slot @slotchange="${this.slotChangeHandler}"></slot>
+            </div>
+            `;
+        }
+
+        let $items = '';
+        
+        if (this.list) {
+            $items = this.list.map((item) => {
+                const cls = ['lui-select-item'];
+                //no multiple selected
+                if (item.index === this.selectedIndex) {
+                    cls.push('selected');
+                }
+                let $delete = '';
+                if (item.deletable) {
+                    $delete = html`<div class="lui-select-item-delete" @click="${this.onItemDelete}"></div>`;
+                }
+                return html`
+                    <div class="${Util.classMap(cls)}" index="${item.index}" @mousedown="${this.onItemClick}">
+                        <div class="lui-select-item-label">${item.label}</div>
+                        ${$delete}
+                    </div>
+                `;
+            });
+        }
+
+        const viewCls = {
+            'lui-select-view': true,
+            'lui-select-input': this.input
+        };
+
+        const viewStm = {
+            width: this._viewWidth ? `${this._viewWidth}` : null
+        };
+
         return html`
-            <div class="${Util.classMap(labelClassList)}">
-                ${this.label}
-            </div> 
-            <div class="lui-select" style="width: ${this.width};">
-                <div
-                    class="${Util.classMap(inputClassList)}"
+            <div class="lui-select ${this.cid}">
+                ${$label}
+                <input
                     type="text"
-                    tabindex="0"
-                    @click="${this.switchDropdown}"
-                    @blur="${this.blurHandler}"
-                >
-                    ${value}
-                </div>
-                <i class="lui-select-dropdown-icon"></i>
-                ${optionsSlot}
+                    class="${Util.classMap(viewCls)}"
+                    style="${Util.styleMap(viewStm)}"
+                    value="${this.value}"
+                    .disabled="${this.disabled}"
+                    ?readonly="${!this.input}"
+                    @click="${this.onClick}"
+                    @focus="${this.onFocus}"
+                    @blur="${this.onBlur}"
+                />
+            </div>
+            ${$options}
+            <div class="lui-select-list" tabindex="0">
+                ${$items}
             </div>
         `;
     }

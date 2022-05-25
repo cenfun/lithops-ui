@@ -41,7 +41,7 @@ export default class extends LuiBase {
 
         return html`
             <div class="lui-modal-mask" @click="${this.closeHandler}"></div>
-            <div class="lui-modal">
+            <div class="lui-modal ${this.cid}">
                 <div class="lui-modal-main lui-flex-column">
                     ${$header}
                     <div class="lui-modal-content lui-flex-auto">

@@ -62,18 +62,17 @@ export default class extends LuiBase {
     }
 
     render() {
-        const cid = `lui-checkbox-${this.uid}`;
         return html`
-            <div class="lui-checkbox">
+            <div class="lui-checkbox ${this.cid}">
                 <input
-                    id="${cid}"
+                    id="${this.cid}"
                     .checked="${this.checked}"
                     .disabled="${this.disabled}"
                     value="${this.value}"
                     type="checkbox"
                     @change="${this.changeHandler}"
                 >
-                <label for="${cid}">
+                <label for="${this.cid}">
                     <slot></slot>
                 </label>
             </div>

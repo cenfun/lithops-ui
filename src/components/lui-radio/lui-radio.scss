@@ -1,18 +1,18 @@
+:host {
+    display: inline-block;
+}
+
 .lui-radio {
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     height: max-content;
-    padding: 5px;
 
     label {
         position: relative;
         display: block;
         padding-left: 25px;
-        min-width: 22px;
-        min-height: 21px;
-        line-height: 1.5;
         cursor: pointer;
 
         &.label-ellipsis {

@@ -94,6 +94,11 @@
             overflow: hidden;
         }
 
+        lui-checkbox,
+        lui-radio {
+            margin-bottom: 5px;
+        }
+
     </style>
 </head>
 
@@ -129,16 +134,17 @@
         <div class="lui-item">
             <div class="lui-item-name">lui-flyover</div>
             <div class="lui-item-example">
-                <select class="st-position">
+                <lui-select label="position:" class="st-position">
                     <option>right</option>
                     <option>left</option>
-                </select>
-                <select class="st-flyover">
-                    <option>30%</option>
+                </lui-select>
+                <lui-select label="width:" class="st-flyover">
+                    <option>100px</option>
+                    <option selected>30%</option>
                     <option>50%</option>
                     <option>80%</option>
-                    <option>100px</option>
-                </select>
+                    <option>100%</option>
+                </lui-select>
                 <lui-button class="bt-toggle-flyover">toggle flayover</lui-button>
             </div>
         </div>
@@ -146,9 +152,9 @@
         <div class="lui-item">
             <div class="lui-item-name">lui-input</div>
             <div class="lui-item-example">
+                <lui-input></lui-input>
                 <lui-input value="value">key:</lui-input>
-                <lui-input placeholder="placeholder" label="name:"></lui-input>
-                <lui-input width="200px"><b>Slot Name:</b></lui-input>
+                <lui-input placeholder="placeholder" label="name:" width="200px"></lui-input>
                 <lui-input disabled>disabled:</lui-input>
             </div>
         </div>
@@ -194,17 +200,26 @@
         <div class="lui-item">
             <div class="lui-item-name">lui-select</div>
             <div class="lui-item-example">
-                <lui-select label="Label" width="200px" multiple>
-                    <lui-select-option value="apple" selected>Apple</lui-select-option>
-                    <lui-select-option value="banana">BananaBananaBanana</lui-select-option>
-                    <lui-select-option value="orange">Orange</lui-select-option>
-                    <lui-select-option value="pineapple">Pineapple</lui-select-option>
-                    <lui-select-option value="">Empty</lui-select-option>
+                <lui-select label="select:">
+                    <option value="apple">Apple</option>
+                    <option value="orange" selected>Orange</option>
+                    <option>Pineapple</option>
+                    <option value="">(Empty)</option>
                 </lui-select>
-                <br>
-                <lui-button class="change-select-disabled">Change disabled</lui-button>
-                <lui-button class="change-select-multiple">Change multiple</lui-button>
-                <lui-button class="change-select-options">Set options</lui-button>
+
+                <lui-select>
+                    <option></option>
+                    <option>Next</option>
+                </lui-select>
+
+                <lui-select label="options:" options="[1,2,3]">
+                </lui-select>
+
+                <lui-select input label="input:" options="[1,2,3]">
+                </lui-select>
+
+                <lui-select label="disabled:" disabled>
+                </lui-select>
             </div>
         </div>
 
@@ -294,6 +309,23 @@
             });
         };
 
+        //keep scroll position when reload
+        const storeKey = 'lui-scroll-position';
+        const scrollTarget = $('.lui-body');
+        const positionHandler = function(event) {
+            const position = sessionStorage.getItem(storeKey);
+            if (position) {
+                const ls = position.split(',');
+                scrollTarget.scrollTo(ls[0], ls[1]);
+                sessionStorage.removeItem(storeKey);
+            }
+            window.removeEventListener('load', positionHandler);
+        };
+        window.addEventListener('load', positionHandler);
+        window.addEventListener('beforeunload', function(e) {
+            sessionStorage.setItem(storeKey, `${scrollTarget.scrollLeft},${scrollTarget.scrollTop}`);
+        });
+
         
         // checkbox control
         $$on('lui-checkbox', 'change', (e) => {
@@ -352,6 +384,11 @@
         });
 
 
+        $$on('lui-select', 'change', (e) => {
+            console.log('select change', e.detail);
+        });
+
+
         // toast control
         const $toast1 = document.createElement('lui-toast');
         const $toast2 = document.createElement('lui-toast');
@@ -390,74 +427,6 @@
         $showToast3.addEventListener('click', () => {
             $toast3.show('toast3', type, timeout, position);
             $toast4.show(null, null, null);
-        });
-
-        // select control
-        const $select = document.querySelector('lui-select');
-        $select.addEventListener('change', (e) => {
-            console.log(e.detail);
-        });
-        let selectMultiple = true;
-        let selectDisabled = false;
-        const $selectDisabled = document.querySelector('.change-select-disabled');
-        const $selectMultiple = document.querySelector('.change-select-multiple');
-        const $selectOption = document.querySelector('.change-select-options');
-        $selectDisabled.addEventListener('click', () => {
-            selectDisabled = !selectDisabled;
-            if (selectDisabled) {
-                $select.setAttribute('disabled', 'disabled');
-                return;
-            }
-            $select.removeAttribute('disabled');
-        });
-        $selectMultiple.addEventListener('click', () => {
-            selectMultiple = !selectMultiple;
-            if (selectMultiple) {
-                $select.setAttribute('multiple', 'multiple');
-                return;
-            }
-            $select.removeAttribute('multiple');
-        });
-        const options = [
-            {
-                key: '1',
-                value: 'value',
-                text: 'text',
-                label: 'label'
-            }
-        ];
-        $selectOption.addEventListener('click', () => {
-            $select.setOptions(options);
-        });
-
-        const $select2 = document.createElement('lui-select');
-        $select2.setOptions(options);
-        //$container.insertBefore($select2, $container.querySelector('.switch-example'));
-
-        // switch control
-        const $switch = document.querySelector('.lui-switch');
-        const $switchFlag = document.querySelector('.change-switch-flags');
-        const $switchColor = document.querySelector('.change-switch-colors');
-        const $switchSize = document.querySelector('.change-switch-size');
-        const $switchDisabled = document.querySelector('.change-switch-disabled');
-        $switchFlag.addEventListener('change', (e) => {
-            if (e.detail === 'empty') {
-                $switch.setAttribute('flags', '');
-                return;
-            }
-            $switch.setAttribute('flags', e.detail);
-        });
-        $switchColor.addEventListener('change', (e) => {
-            $switch.setAttribute('colors', e.detail);
-        });
-        $switchSize.addEventListener('change', (e) => {
-            $switch.setAttribute('size', e.detail);
-        });
-        $switchDisabled.addEventListener('click', () => {
-            $switch.disabled = !$switch.disabled;
-        });
-        $switch.addEventListener('change', (e) => {
-            console.log(e.detail);
         });
 
     </script>

@@ -53,7 +53,7 @@ export default class extends LuiBase {
             'border-color': this.borderColor,
             'background': `linear-gradient(${this.color} 0 0) 0/${this.percentage}% no-repeat`
         };
-        return html`<div class="lui-progress" style="${Util.styleMap(stm)}"></div>`;
+        return html`<div class="lui-progress ${this.cid}" style="${Util.styleMap(stm)}"></div>`;
     }
 
 }

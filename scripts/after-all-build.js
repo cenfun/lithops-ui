@@ -32,5 +32,7 @@ module.exports = (o, Util) => {
 
     fs.writeFileSync(path.resolve(__dirname, '../README.md'), readme);
 
+    console.log('updated README.md');
+
     return 0;
 };

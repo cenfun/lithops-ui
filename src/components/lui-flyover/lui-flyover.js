@@ -30,7 +30,7 @@ export default class extends LuiBase {
         super.connectedCallback();
         this.addStyle(componentStyle, 'lui-flyover', document.head);
 
-        this.classList.add('lui-flyover', `lui-flyover-${this.position}`);
+        this.classList.add('lui-flyover', this.cid, `lui-flyover-${this.position}`);
 
         this.initBodyClass();
 
@@ -120,6 +120,10 @@ export default class extends LuiBase {
     renderWidth() {
         const st = this.style;
         st.width = this.width;
+        //cut off shadow after out of body
+        if (this.position === 'left' && this.width === '100%') {
+            st.overflow = 'hidden';
+        }
     }
 
     render() {

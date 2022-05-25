@@ -78,7 +78,7 @@ export default class extends LuiBase {
 
         return html`
         
-            <div class="lui-input">
+            <div class="lui-input ${this.cid}">
                 <label>
                     <slot @slotchange=${this.slotChangeHandler}>${this.label}</slot>
                 </label>
