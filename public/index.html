@@ -307,37 +307,6 @@
             </div>
         </div>
 
-        <div class="lui-item">
-            <div class="lui-item-name">lui-toast</div>
-            <div class="lui-item-example">
-                <lui-button class="show-toast1">Show Toast 1</lui-button>
-                <lui-button class="show-toast2">Show Toast 2</lui-button>
-                <lui-button class="show-toast3">Show Toast 3</lui-button>
-                <div class="change-toast-type" style="display: flex; align-items: center;">
-                    <p>Toast Type</p>
-                    <lui-radio name="toastType" value="info" checked>info</lui-radio>
-                    <lui-radio name="toastType" value="warning">warning</lui-radio>
-                    <lui-radio name="toastType" value="error">error</lui-radio>
-                    <lui-radio name="toastType" value="success">success</lui-radio>
-                </div>
-                <lui-input class="change-toast-content" type="text" value="hello world">Toast Content</lui-input>
-                <lui-input class="change-toast-timeout" type="number" value="3000">Toast Timeout</lui-input>
-                <lui-toast message="connected" timeout="0" type="warning" class="lui-toast" position></lui-toast>
-                <div class="change-toast-position" style="display: flex; align-items: center;">
-                    <p>Toast Position</p>
-                    <lui-radio name="toastPosition" value="left-top">left-top</lui-radio>
-                    <lui-radio name="toastPosition" value="center-top" checked>center-top</lui-radio>
-                    <lui-radio name="toastPosition" value="right-top">right-top</lui-radio>
-                    <lui-radio name="toastPosition" value="left-center">left-center</lui-radio>
-                    <lui-radio name="toastPosition" value="center-center">center-center</lui-radio>
-                    <lui-radio name="toastPosition" value="right-center">right-center</lui-radio>
-                    <lui-radio name="toastPosition" value="left-bottom">left-bottom</lui-radio>
-                    <lui-radio name="toastPosition" value="center-bottom">center-bottom</lui-radio>
-                    <lui-radio name="toastPosition" value="right-bottom">right-bottom</lui-radio>
-                </div>
-            </div>
-        </div>
-
     </div>
     <script>
         const lui = window['lithops-ui'];
