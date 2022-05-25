@@ -21,7 +21,6 @@
     cursor: pointer;
     transition: background-color 0.1s;
     position: relative;
-    box-sizing: border-box;
 }
 
 .lui-switch-state {
@@ -56,6 +55,11 @@
 .lui-switch-s {
     font-size: 12px;
 
+    .lui-switch-label {
+        height: 18px;
+        line-height: 18px;
+    }
+
     .lui-switch-button {
         height: 18px;
         line-height: 18px;
@@ -78,7 +82,7 @@
 }
 
 .lui-switch-m {
-    font-size: 13px;
+    font-size: 14px;
 
     .lui-switch-button {
         height: 20px;

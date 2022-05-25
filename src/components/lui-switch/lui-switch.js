@@ -89,7 +89,7 @@ export default class extends LuiBase {
 
     afterSlotChange() {
         if (this.$('slot').assignedNodes().length) {
-            this.$('.lui-switch-label').style.display = 'inline-block';
+            this.$('.lui-switch-label').style.display = 'block';
         }
     }
 
