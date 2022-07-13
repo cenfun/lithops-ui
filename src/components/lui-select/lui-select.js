@@ -339,30 +339,15 @@ export default class extends LuiBase {
         //console.log('initOptions');
         const dataOptions = Array.from(options).map((item) => {
             if (item && typeof item === 'object') {
-                const label = item.label;
-                let value = item.value;
-                if (Util.isInvalid(value)) {
-                    value = label;
-                }
-
-                const option = {
-                    label,
-                    value
+                return {
+                    ... item,
+                    label: item.label || item.value,
+                    value: item.value || item.label
                 };
-
-                if (item.selected) {
-                    option.selected = true;
-                }
-                if (item.deletable) {
-                    option.deletable = true;
-                }
-
-                return option;
-
             }
             return {
-                label: item,
-                value: item
+                label: `${item}`,
+                value: `${item}`
             };
         });
         this.initList(dataOptions);
@@ -388,12 +373,12 @@ export default class extends LuiBase {
             
             //selected only has key
             const selected = elem.getAttribute('selected');
-            const deletable = elem.getAttribute('deletable');
+            const removable = elem.getAttribute('removable');
             if (selected !== null) {
                 option.selected = true;
             }
-            if (deletable !== null) {
-                option.deletable = true;
+            if (removable !== null) {
+                option.removable = true;
             }
 
             slotOptions.push(option);
@@ -430,7 +415,7 @@ export default class extends LuiBase {
                     cls.push('selected');
                 }
                 let $delete = '';
-                if (item.deletable) {
+                if (item.removable) {
                     $delete = html`<div class="lui-select-item-delete">${generateIcon('x')}</div>`;
                 }
                 return html`

@@ -2,7 +2,7 @@
 # Lithops UI
 - Lightweight UI web components based on [lit](https://github.com/lit/lit)
 - Zero dependencies (lit bundled)
-- Dist size (js minified: true): 61.4KB / gzip: 16.2KB
+- Dist size (js minified: true): 61.3KB / gzip: 16.2KB
 
 ## Preview Online
 [https://cenfun.github.io/lithops-ui/](https://cenfun.github.io/lithops-ui/)

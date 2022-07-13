@@ -2,13 +2,13 @@
 # Lithops UI
 - Lightweight UI web components based on [lit](https://github.com/lit/lit)
 - Zero dependencies (lit bundled)
-- {place-holder-size}
+- {placeholder-size}
 
 ## Preview Online
 [https://cenfun.github.io/lithops-ui/](https://cenfun.github.io/lithops-ui/)
 
 ## Components
-{place-holder-components}
+{placeholder-components}
 ## Install
 ```sh
 npm i lithops-ui

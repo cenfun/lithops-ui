@@ -26,8 +26,8 @@ module.exports = (o, Util) => {
     const readmeStr = fs.readFileSync(path.resolve(__dirname, 'README.md'), 'utf8');
 
     const readme = Util.replace(readmeStr, {
-        'place-holder-size': sizeStr,
-        'place-holder-components': componentsStr
+        'placeholder-size': sizeStr,
+        'placeholder-components': componentsStr
     });
 
     fs.writeFileSync(path.resolve(__dirname, '../README.md'), readme);
