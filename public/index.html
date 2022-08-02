@@ -417,47 +417,6 @@
             console.log(this.cid, 'delete', e.detail);
         });
 
-
-        // toast control
-        const $toast1 = document.createElement('lui-toast');
-        const $toast2 = document.createElement('lui-toast');
-        const $toast3 = document.createElement('lui-toast');
-        const $toast4 = document.querySelector('.lui-toast');
-        let type = 'info';
-        let content = 'hello world';
-        let timeout = 3000;
-        let position = 'center-top';
-        const $toastType = document.querySelector('.change-toast-type');
-        const $toastContent = document.querySelector('.change-toast-content');
-        const $toastTimeout = document.querySelector('.change-toast-timeout');
-        const $toastPosition = document.querySelector('.change-toast-position');
-        $toastType.addEventListener('change', (e) => {
-            e.stopPropagation();
-            type = e.detail;
-        });
-        $toastContent.addEventListener('input', (e) => {
-            content = e.detail;
-        });
-        $toastTimeout.addEventListener('input', (e) => {
-            timeout = e.detail;
-        });
-        $toastPosition.addEventListener('change', (e) => {
-            position = e.detail;
-        });
-        const $showToast1 = document.querySelector('.show-toast1');
-        $showToast1.addEventListener('click', () => {
-            $toast1.show(content, type, timeout, position);
-        });
-        const $showToast2 = document.querySelector('.show-toast2');
-        $showToast2.addEventListener('click', () => {
-            $toast2.show('toast2', type, timeout, position);
-        });
-        const $showToast3 = document.querySelector('.show-toast3');
-        $showToast3.addEventListener('click', () => {
-            $toast3.show('toast3', type, timeout, position);
-            $toast4.show(null, null, null);
-        });
-
     </script>
 </body>
 
