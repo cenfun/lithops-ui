@@ -49,7 +49,7 @@ export default class extends LuiBase {
         }
 
         this.selectedIndex = index;
-        
+
         this.updateSelected();
 
         this.emit('change', this.value || index);
@@ -134,7 +134,7 @@ export default class extends LuiBase {
             this.updateSelected();
         }, 10);
     }
-    
+
     render() {
         const $toolbar = html`
             <div class="lui-tab-toolbar flex-row">
@@ -160,7 +160,7 @@ export default class extends LuiBase {
                 ${$tabs}
             `;
         }
-        
+
         const cls = ['lui-tab', this.cid];
         if (this.fullHeight) {
             cls.push('lui-tab-full-height');

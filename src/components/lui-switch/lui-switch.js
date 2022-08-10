@@ -124,7 +124,7 @@ export default class extends LuiBase {
                 stateCls.show = show;
                 stateCls.hide = !show;
             }
-            
+
             return html`<div class="${Util.classMap(stateCls)}">${item}</div>`;
         });
 
@@ -140,5 +140,5 @@ export default class extends LuiBase {
             </div>
         `;
     }
-    
+
 }

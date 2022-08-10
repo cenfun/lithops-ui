@@ -7,7 +7,7 @@ class LuiBase extends LitElement {
 
     //for static class, not instance tagName
     static tagName = '';
-    
+
     static properties = {
         label: {
             type: String
@@ -69,7 +69,7 @@ class LuiBase extends LitElement {
             $style.setAttribute('context', context);
         }
         $root.appendChild($style);
-        
+
         return $style;
     }
 

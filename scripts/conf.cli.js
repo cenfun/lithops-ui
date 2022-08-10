@@ -10,7 +10,7 @@ module.exports = {
 
         vendors: ['lithops-ui'],
 
-        afterAll: require('./scripts/after-all-build.js')
+        afterAll: require('./after-all-build.js')
     }
 
 };

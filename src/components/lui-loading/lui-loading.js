@@ -49,7 +49,7 @@ export default class extends LuiBase {
         }
         return ls.join(' ');
     }
-    
+
     render() {
 
         const classList = this.getClassList();

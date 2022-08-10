@@ -11,7 +11,7 @@ module.exports = (o, Util) => {
     const size = Util.BF(asset.size);
     const gzip = Util.BF(asset.sizeGzip);
 
-    const minified = Boolean(item.minify);
+    const minified = Boolean(item.production);
 
     const sizeStr = `Dist size (js minified: ${minified}): ${size} / gzip: ${gzip}`;
 

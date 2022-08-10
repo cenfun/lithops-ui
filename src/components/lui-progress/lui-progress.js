@@ -44,7 +44,7 @@ export default class extends LuiBase {
         super.connectedCallback();
         this.addStyle(componentStyle, 'lui-progress');
     }
-    
+
     render() {
         const stm = {
             'width': this.width,

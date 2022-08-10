@@ -8,7 +8,7 @@ import componentStyle from './lui-checkbox.scss';
 
 
 export default class extends LuiBase {
-    
+
     static properties = {
         checked: {
             type: Boolean

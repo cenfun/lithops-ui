@@ -112,7 +112,7 @@ export default class extends LuiBase {
         this.emit('close');
         this.remove();
     }
-    
+
     closeHandler() {
         this.close();
     }

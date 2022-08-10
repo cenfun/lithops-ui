@@ -1,5 +1,5 @@
 export default function(context) {
-    
+
     const components = {};
 
     const paths = context.keys();
@@ -8,7 +8,7 @@ export default function(context) {
     paths.forEach((path) => {
 
         //console.log(path);
-    
+
         //get folder name
         //kebab case, custom element names must contain a hyphen.
         const list = path.toLowerCase().split('/');
@@ -17,7 +17,7 @@ export default function(context) {
         const fileName = list.pop();
         const folderName = list.pop();
 
-        // "./lui-button/lui-button.js" 
+        // "./lui-button/lui-button.js"
         // "./path-to/lui-grid/lui-grid.js"
 
         // entry file name must be same with folder name
@@ -50,7 +50,7 @@ export default function(context) {
         if (Component.private) {
             return;
         }
-    
+
         components[tagName] = Component;
     });
 

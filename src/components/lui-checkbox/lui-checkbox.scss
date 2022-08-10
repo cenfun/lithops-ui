@@ -96,7 +96,7 @@
             }
         }
 
-        &:not(:disabled):not(:checked):not(:focus) {
+        &:not(:disabled, :checked, :focus) {
             ~ label:hover::before {
                 border-color: #888;
             }

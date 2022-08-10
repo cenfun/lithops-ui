@@ -73,7 +73,7 @@ export default class extends LuiBase {
         //console.log(this.value);
         this.emit('input', this.value);
     }
-    
+
     render() {
 
         return html`

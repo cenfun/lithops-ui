@@ -123,7 +123,7 @@ export default class extends LuiBase {
         const iconWidth = 15;
         const listMinWidth = 45;
         const listMaxWidth = 300;
-        
+
         const listRect = this.$list.getBoundingClientRect();
         //console.log(this.cid, listRect.width);
         const vw = Util.clamp(Math.ceil(listRect.width) + iconWidth, listMinWidth, listMaxWidth);
@@ -133,7 +133,7 @@ export default class extends LuiBase {
 
         //console.log(this._viewWidth);
 
-        
+
     }
 
     open() {
@@ -151,7 +151,7 @@ export default class extends LuiBase {
         }
 
         this.isOpen = true;
-        
+
         document.body.appendChild(this.$list);
 
         this.layout();
@@ -284,7 +284,7 @@ export default class extends LuiBase {
         //stop click item
         e.stopImmediatePropagation();
 
-        
+
         //this.emit('delete', );
 
     }
@@ -370,7 +370,7 @@ export default class extends LuiBase {
                 label,
                 value
             };
-            
+
             //selected only has key
             const selected = elem.getAttribute('selected');
             const removable = elem.getAttribute('removable');
@@ -406,7 +406,7 @@ export default class extends LuiBase {
         }
 
         let $items = '';
-        
+
         if (this.list) {
             $items = this.list.map((item) => {
                 const cls = ['lui-select-item'];

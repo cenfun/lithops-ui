@@ -28,7 +28,7 @@ export default class extends LuiBase {
         super.connectedCallback();
         this.addStyle(componentStyle, 'lui-button');
     }
-    
+
     render() {
 
         //console.log('settings', this.settings);
